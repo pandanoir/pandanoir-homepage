@@ -5,7 +5,7 @@ const Section = ({ children }: PropsWithChildren) => (
   <div className="flex flex-col bg-slate-700/40 p-3 h-max">{children}</div>
 );
 const Heading = ({ children }: PropsWithChildren) => (
-  <h2 className="text-4xl font-bold border-b-2 border-gray-600 w-96">
+  <h2 className="text-4xl font-bold border-b-2 border-gray-600 w-72 sm:w-80 md:w-96 lg:w-96">
     {children}
   </h2>
 );
@@ -34,7 +34,7 @@ const Home = () => (
     <HeroImage />
     <HeroContent>
       <h1 className="flex-none text-6xl font-bold">pandanoir</h1>
-      <div className="flex gap-4 row-start-1 col-start-[-1]">
+      <div className="flex flex-col md:flex-row flex-wrap justify-center gap-4 row-start-1 col-start-[-1]">
         <Section>
           <Heading>Works</Heading>
           <a
