@@ -25,7 +25,9 @@ const fetchOgp = (url: string) =>
     });
 
 export const fetchBlogFeed = (): Promise<Article[]> =>
-  fetch('https://www.pandanoir.info/feed')
+  fetch('https://www.pandanoir.info/feed', {
+    next: { revalidate: 60 * 60 * 12 }, //半日ごとに更新
+  })
     .then((res) => res.text())
     .then((res) =>
       Promise.all(

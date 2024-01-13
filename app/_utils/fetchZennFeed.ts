@@ -6,7 +6,9 @@ const parser = new XMLParser({
 });
 
 export const fetchZennFeed = (): Promise<Article[]> =>
-  fetch('https://zenn.dev/pandanoir/feed')
+  fetch('https://zenn.dev/pandanoir/feed', {
+    next: { revalidate: 60 * 60 * 12 }, //半日ごとに更新
+  })
     .then((res) => res.text())
     .then((res) =>
       z
