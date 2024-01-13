@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { PropsWithChildren } from 'react';
-import { fetchBlogFeed } from './posts/fetchBlog';
-import { fetchZennFeed } from './posts/fetchZennFeed';
+import { fetchAllFeed } from './_utils/fetchAllFeed';
 
 const Section = ({ children }: PropsWithChildren) => (
   <div className="flex flex-col bg-slate-700/40 p-3 h-max">{children}</div>
@@ -30,9 +29,7 @@ const HeroContent = ({ children }: PropsWithChildren) => (
   </div>
 );
 const Home = async () => {
-  const recentPost = (await Promise.all([fetchBlogFeed(), fetchZennFeed()]))
-    .flat()
-    .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime())[0];
+  const recentPost = (await fetchAllFeed())[0];
   return (
     <div
       className={`grid w-screen h-screen text-slate-300

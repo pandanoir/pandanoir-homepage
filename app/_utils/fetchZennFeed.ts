@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Article } from './ArticleList';
+import { Article } from '../posts/ArticleList';
 import { XMLParser } from 'fast-xml-parser';
 const parser = new XMLParser({
   ignoreAttributes: false,
