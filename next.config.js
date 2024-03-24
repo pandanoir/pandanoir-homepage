@@ -9,6 +9,12 @@ const nextConfig = {
         permanent: true,
         basePath: false,
       },
+      {
+        source: '/prettier',
+        destination: '/prettierrc.sh',
+        permanent: true,
+        basePath: false,
+      },
     ];
   },
 };
