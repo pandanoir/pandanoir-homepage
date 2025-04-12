@@ -16,10 +16,12 @@ import { SlNotebook } from 'react-icons/sl';
 import clsx from 'clsx';
 
 const Section = ({ children }: PropsWithChildren) => (
-  <div className="flex flex-col bg-slate-700/40 p-3 h-max">{children}</div>
+  <div className="flex flex-col bg-slate-700/40 p-3 w-full h-max">
+    {children}
+  </div>
 );
 const Heading = ({ children }: PropsWithChildren) => (
-  <h2 className="text-4xl font-bold border-b-2 border-gray-600 w-72 sm:w-80 md:w-96 lg:w-96 mb-3">
+  <h2 className="text-4xl font-bold border-b-2 border-gray-600 mb-3">
     {children}
   </h2>
 );
@@ -39,7 +41,7 @@ const HeroImage = () => (
   </div>
 );
 const HeroContent = ({ children }: PropsWithChildren) => (
-  <div className="z-10 flex flex-col gap-4 items-center row-start-1 col-start-[-1]">
+  <div className="z-10 flex flex-col gap-4 items-center row-start-1 col-start-[-1] px-8">
     {children}
   </div>
 );
@@ -63,7 +65,7 @@ const ExternalLinkListItem = ({
 );
 
 const Home = async () => {
-  const recentPost = (await fetchAllFeed())[0];
+  const recentPosts = (await fetchAllFeed()).slice(0, 3);
   return (
     <div
       className={`grid w-screen h-screen text-slate-300
@@ -72,23 +74,33 @@ const Home = async () => {
       <HeroImage />
       <HeroContent>
         <h1 className="flex-none text-6xl font-bold">pandanoir</h1>
-        <div className="flex flex-col md:flex-row flex-wrap justify-center gap-4 row-start-1 col-start-[-1]">
+        <div className="flex flex-col justify-center gap-4 row-start-1 col-start-[-1] w-full">
           <Section>
-            <Heading>Recent post</Heading>
-            <a
-              href={recentPost.link}
-              target="_blank"
-              rel="noreferrer"
-              className="w-96"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={recentPost.image}
-                className="w-96 aspect-ogp object-cover rounded"
-                alt=""
-              />
-              {recentPost.title}
-            </a>
+            <Heading>Recent posts</Heading>
+            <div className="flex gap-4 @container">
+              {recentPosts.map((post, i) => (
+                <a
+                  key={post.title}
+                  href={post.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={clsx(
+                    'w-96',
+                    i === 2
+                      ? 'hidden @7xl:block'
+                      : i === 1 && 'hidden @4xl:block',
+                  )}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={post.image}
+                    className="w-96 aspect-ogp object-cover rounded"
+                    alt=""
+                  />
+                  {post.title}
+                </a>
+              ))}
+            </div>
             <br />
             <Link href="/posts">read more</Link>
           </Section>
