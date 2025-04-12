@@ -1,18 +1,18 @@
 import Image from 'next/image';
-import { FaFileAlt } from 'react-icons/fa';
 import Link from 'next/link';
 import { ComponentProps, PropsWithChildren } from 'react';
 import { fetchAllFeed } from './_utils/fetchAllFeed';
 import {
+  FaBook,
+  FaFileAlt,
   FaFilm,
-  FaMusic,
   FaGamepad,
-  FaYoutube,
-  FaTwitter,
   FaGithub,
+  FaMusic,
+  FaTwitter,
+  FaYoutube,
 } from 'react-icons/fa';
 import { SiWantedly, SiZenn } from 'react-icons/si';
-import { SlNotebook } from 'react-icons/sl';
 import clsx from 'clsx';
 
 const Section = ({ children }: PropsWithChildren) => (
@@ -51,6 +51,7 @@ const Home = async () => {
   return (
     <div className="text-slate-300 px-8 flex flex-col justify-center gap-3 sm:gap-4">
       <h1 className="flex-none text-5xl sm:text-6xl font-bold">pandanoir</h1>
+      ウェブフロントエンドエンジニア。ReactとTypeScriptに造詣が深い。
       <Section>
         <Heading>Profile</Heading>
         <div className="flex flex-col gap-3">
@@ -125,7 +126,6 @@ const Home = async () => {
           </div>
         </div>
       </Section>
-
       <Section>
         <Heading>Education</Heading>
         <ul className="pl-3">
@@ -133,7 +133,6 @@ const Home = async () => {
           <li>2013-2016 新潟高校 普通科</li>
         </ul>
       </Section>
-
       <Section>
         <Heading>Links</Heading>
         <ExternalLink
@@ -147,7 +146,7 @@ const Home = async () => {
           href="https://pandanoir.info"
           className="w-min flex items-center gap-1"
         >
-          <SlNotebook />
+          <FaBook />
           blog
         </ExternalLink>
         <ExternalLink
@@ -179,7 +178,6 @@ const Home = async () => {
           Resume
         </ExternalLink>
       </Section>
-
       <Section>
         <Heading>Recent posts</Heading>
         <div className="flex gap-4 @container">
