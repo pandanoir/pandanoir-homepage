@@ -32,7 +32,6 @@ const SubHeading = ({ children }: PropsWithChildren) => (
 const ExternalLink = (props: ComponentProps<'a'>) => (
   <a
     {...props}
-    target="_blank"
     rel="noopener noreferrer"
     className={clsx(props.className, 'hover:underline')}
   />
@@ -188,7 +187,6 @@ const Home = async () => {
             <a
               key={post.title}
               href={post.link}
-              target="_blank"
               rel="noreferrer"
               className={clsx(
                 'w-96',
