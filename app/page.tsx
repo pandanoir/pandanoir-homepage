@@ -151,6 +151,16 @@ const Home = async () => {
           </Section>
 
           <Section>
+            <Heading>Education</Heading>
+            <ul className="pl-3">
+              <li>
+                2016-2020 東北大学 工学部 電気情報物理工学科 情報工学コース
+              </li>
+              <li>2013-2016 新潟高校 普通科</li>
+            </ul>
+          </Section>
+
+          <Section>
             <Heading>Links</Heading>
             <ExternalLink
               href="https://twitter.com/le_panda_noir"
