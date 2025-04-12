@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { FaFileAlt } from 'react-icons/fa';
 import Link from 'next/link';
 import { ComponentProps, PropsWithChildren } from 'react';
 import { fetchAllFeed } from './_utils/fetchAllFeed';
@@ -7,7 +8,11 @@ import {
   FaMusic,
   FaGamepad,
   FaYoutube,
+  FaTwitter,
+  FaGithub,
 } from 'react-icons/fa';
+import { SiWantedly, SiZenn } from 'react-icons/si';
+import { SlNotebook } from 'react-icons/sl';
 import clsx from 'clsx';
 
 const Section = ({ children }: PropsWithChildren) => (
@@ -165,38 +170,48 @@ const Home = async () => {
 
           <Section>
             <Heading>Links</Heading>
-            <a
+            <ExternalLink
               href="https://twitter.com/le_panda_noir"
-              target="_blank"
-              rel="noreferrer"
-              className="w-min"
+              className="w-min flex items-center gap-1"
             >
+              <FaTwitter />
               Twitter
-            </a>
-            <a
+            </ExternalLink>
+            <ExternalLink
               href="https://pandanoir.info"
-              target="_blank"
-              rel="noreferrer"
-              className="w-min"
+              className="w-min flex items-center gap-1"
             >
+              <SlNotebook />
               blog
-            </a>
-            <a
+            </ExternalLink>
+            <ExternalLink
               href="https://zenn.dev/pandanoir"
-              target="_blank"
-              rel="noreferrer"
-              className="w-min"
+              className="w-min flex items-center gap-1"
             >
+              <SiZenn />
               Zenn
-            </a>
-            <a
+            </ExternalLink>
+            <ExternalLink
               href="https://github.com/pandanoir"
-              target="_blank"
-              rel="noreferrer"
-              className="w-min"
+              className="w-min flex items-center gap-1"
             >
+              <FaGithub />
               GitHub
-            </a>
+            </ExternalLink>
+            <ExternalLink
+              href="https://www.wantedly.com/id/naoto_ikuno"
+              className="w-min flex items-center gap-1"
+            >
+              <SiWantedly />
+              Wantedly
+            </ExternalLink>
+            <ExternalLink
+              href="https://resume.pandanoir.net/"
+              className="w-min flex items-center gap-1"
+            >
+              <FaFileAlt />
+              Resume
+            </ExternalLink>
           </Section>
         </div>
       </HeroContent>
