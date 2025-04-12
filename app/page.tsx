@@ -76,36 +76,6 @@ const Home = async () => {
         <h1 className="flex-none text-6xl font-bold">pandanoir</h1>
         <div className="flex flex-col justify-center gap-4 row-start-1 col-start-[-1] w-full">
           <Section>
-            <Heading>Recent posts</Heading>
-            <div className="flex gap-4 @container">
-              {recentPosts.map((post, i) => (
-                <a
-                  key={post.title}
-                  href={post.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={clsx(
-                    'w-96',
-                    i === 2
-                      ? 'hidden @7xl:block'
-                      : i === 1 && 'hidden @4xl:block',
-                  )}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={post.image}
-                    className="w-96 aspect-ogp object-cover rounded"
-                    alt=""
-                  />
-                  {post.title}
-                </a>
-              ))}
-            </div>
-            <br />
-            <Link href="/posts">read more</Link>
-          </Section>
-
-          <Section>
             <Heading>Profile</Heading>
             <div className="flex flex-col gap-3">
               <div>
@@ -224,6 +194,36 @@ const Home = async () => {
               <FaFileAlt />
               Resume
             </ExternalLink>
+          </Section>
+
+          <Section>
+            <Heading>Recent posts</Heading>
+            <div className="flex gap-4 @container">
+              {recentPosts.map((post, i) => (
+                <a
+                  key={post.title}
+                  href={post.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={clsx(
+                    'w-96',
+                    i === 2
+                      ? 'hidden @7xl:block'
+                      : i === 1 && 'hidden @4xl:block',
+                  )}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={post.image}
+                    className="w-96 aspect-ogp object-cover rounded"
+                    alt=""
+                  />
+                  {post.title}
+                </a>
+              ))}
+            </div>
+            <br />
+            <Link href="/posts">read more</Link>
           </Section>
         </div>
       </HeroContent>
