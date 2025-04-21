@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { ComponentProps, PropsWithChildren } from 'react';
 import { fetchAllFeed } from './_utils/fetchAllFeed';
