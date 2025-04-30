@@ -100,9 +100,7 @@ export default async function Home() {
             alt=""
             className="sm:block hidden w-36 h-36 rounded-full [grid-area:icon]"
           />
-          <h1
-            className="text-5xl sm:text-6xl font-bold self-end [grid-area:name]"
-          >
+          <h1 className="text-5xl sm:text-6xl font-bold self-end [grid-area:name]">
             pandanoir
           </h1>
           <p className="[grid-area:description]">
