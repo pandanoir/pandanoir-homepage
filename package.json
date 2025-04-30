@@ -9,16 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "1.2.0",
+    "@radix-ui/react-tooltip": "1.2.4",
     "@tailwindcss/postcss": "4.1.3",
     "@types/jsdom": "21.1.6",
+    "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "fast-xml-parser": "4.3.2",
     "jsdom": "23.2.0",
+    "lucide-react": "0.503.0",
     "next": "15.3.1",
     "prettier": "3.5.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-icons": "5.5.0",
+    "tailwind-merge": "3.2.0",
     "zod": "3.22.4"
   },
   "devDependencies": {
@@ -30,6 +35,7 @@
     "eslint-config-next": "15.3.1",
     "postcss": "8.4.31",
     "tailwindcss": "4.1.3",
+    "tw-animate-css": "1.2.8",
     "typescript": "5.8.3"
   }
 }

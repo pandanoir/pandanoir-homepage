@@ -1,18 +1,20 @@
 import Link from 'next/link';
-import { ComponentProps, PropsWithChildren } from 'react';
-import { fetchAllFeed } from './_utils/fetchAllFeed';
-import {
-  FaBook,
-  FaFileAlt,
-  FaFilm,
-  FaGamepad,
-  FaGithub,
-  FaMusic,
-  FaTwitter,
-  FaYoutube,
-} from 'react-icons/fa';
+import { ComponentProps, PropsWithChildren, ReactNode } from 'react';
+import { FaFilm, FaGamepad, FaMusic, FaYoutube } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import { FiGithub } from 'react-icons/fi';
 import { SiWantedly, SiZenn } from 'react-icons/si';
+import { BsFillPersonLinesFill } from 'react-icons/bs';
+
 import clsx from 'clsx';
+import { fetchAllFeed } from './_utils/fetchAllFeed';
+import { HatenaBlogLogo } from './_components/HatenaBlogLogo';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from './_components/ui/tooltip';
 
 const Section = ({ children }: PropsWithChildren) => (
   <div className="flex flex-col bg-slate-700/40 p-3 w-full h-max">
@@ -44,13 +46,95 @@ const ExternalLinkListItem = ({
     <ExternalLink href={href}>{children}</ExternalLink>
   </li>
 );
+const IconLink = ({
+  href,
+  name,
+  icon,
+}: {
+  href: string;
+  name: string;
+  icon: ReactNode;
+}) => (
+  <TooltipProvider delayDuration={0}>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <a
+          href={href}
+          rel="noopener noreferrer"
+          className="hover:underline w-min flex items-center gap-1 p-1.5 bg-slate-900 border border-slate-800 border-2 rounded-md"
+        >
+          {icon}
+          <span className="sr-only">{name}</span>
+        </a>
+      </TooltipTrigger>
+      <TooltipContent
+        className="bg-gray-400 text-black"
+        arrowClassName="bg-gray-400 fill-gray-400"
+      >
+        {name}
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+);
 
-const Home = async () => {
+export default async function Home() {
   const recentPosts = (await fetchAllFeed()).slice(0, 3);
   return (
     <div className="text-slate-300 px-8 flex flex-col justify-center gap-3 sm:gap-4">
       <h1 className="flex-none text-5xl sm:text-6xl font-bold">pandanoir</h1>
       ウェブフロントエンドエンジニア。ReactとTypeScriptに造詣が深い。
+      <ul className="flex gap-2">
+        <li>
+          <IconLink
+            href="https://x.com/le_panda_noir"
+            icon={<FaXTwitter size="1.3rem" />}
+            name="X"
+          />
+        </li>
+        <li>
+          <IconLink
+            href="https://pandanoir.info"
+            icon={
+              <HatenaBlogLogo
+                width="1.3rem"
+                height="1.3rem"
+                stroke="currentColor"
+                fill="currentColor"
+                viewBox="51 51 198 198"
+              />
+            }
+            name="はてなブログ"
+          />
+        </li>
+        <li>
+          <IconLink
+            href="https://zenn.dev/pandanoir"
+            icon={<SiZenn size="1.3rem" />}
+            name="Zenn"
+          />
+        </li>
+        <li>
+          <IconLink
+            href="https://github.com/pandanoir"
+            icon={<FiGithub size="1.3rem" />}
+            name="GitHub"
+          />
+        </li>
+        <li>
+          <IconLink
+            href="https://www.wantedly.com/id/naoto_ikuno"
+            icon={<SiWantedly size="1.3rem" />}
+            name="Wantedly"
+          />
+        </li>
+        <li>
+          <IconLink
+            href="https://resume.pandanoir.net/"
+            icon={<BsFillPersonLinesFill size="1.3rem" />}
+            name="職務経歴書"
+          />
+        </li>
+      </ul>
       <Section>
         <Heading>Profile</Heading>
         <div className="flex flex-col gap-3">
@@ -133,51 +217,6 @@ const Home = async () => {
         </ul>
       </Section>
       <Section>
-        <Heading>Links</Heading>
-        <ExternalLink
-          href="https://twitter.com/le_panda_noir"
-          className="w-min flex items-center gap-1"
-        >
-          <FaTwitter />
-          Twitter
-        </ExternalLink>
-        <ExternalLink
-          href="https://pandanoir.info"
-          className="w-min flex items-center gap-1"
-        >
-          <FaBook />
-          blog
-        </ExternalLink>
-        <ExternalLink
-          href="https://zenn.dev/pandanoir"
-          className="w-min flex items-center gap-1"
-        >
-          <SiZenn />
-          Zenn
-        </ExternalLink>
-        <ExternalLink
-          href="https://github.com/pandanoir"
-          className="w-min flex items-center gap-1"
-        >
-          <FaGithub />
-          GitHub
-        </ExternalLink>
-        <ExternalLink
-          href="https://www.wantedly.com/id/naoto_ikuno"
-          className="w-min flex items-center gap-1"
-        >
-          <SiWantedly />
-          Wantedly
-        </ExternalLink>
-        <ExternalLink
-          href="https://resume.pandanoir.net/"
-          className="w-min flex items-center gap-1"
-        >
-          <FaFileAlt />
-          Resume
-        </ExternalLink>
-      </Section>
-      <Section>
         <Heading>Recent posts</Heading>
         <div className="flex gap-4 @container">
           {recentPosts.map((post, i) => (
@@ -205,5 +244,4 @@ const Home = async () => {
       </Section>
     </div>
   );
-};
-export default Home;
+}
