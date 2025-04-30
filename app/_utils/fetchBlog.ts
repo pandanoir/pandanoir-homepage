@@ -48,6 +48,7 @@ export const fetchBlogFeed = (): Promise<Article[]> =>
         })
         .parse(parsedXml);
 
+      console.log(validated.feed.entry.at(0)?.title);
       return Promise.all(
         validated.feed.entry.map(async (x) => {
           const url = x.link[0]['@_href'];
