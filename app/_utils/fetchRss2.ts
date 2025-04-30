@@ -22,7 +22,7 @@ const rss2Schema = z.object({
 
 export const fetchRss2 = (url: string): Promise<Article[]> =>
   fetch(url, {
-    next: { revalidate: 60 * 60 * 12 }, //半日ごとに更新
+    next: { revalidate: 60 }, // 1分ごとに更新
   })
     .then((res) => res.text())
     .then((res) =>
