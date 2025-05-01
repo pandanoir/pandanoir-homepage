@@ -17,6 +17,7 @@ import {
   TooltipTrigger,
 } from './_components/ui/tooltip';
 import { QrCodeImage } from './_components/QrCodeImage';
+import { ExternalLink } from './_components/ExternalLink';
 
 const Section = ({ children }: PropsWithChildren) => (
   <div className="flex flex-col bg-slate-700/40 p-3 w-full h-max">
@@ -32,13 +33,6 @@ const SubHeading = ({ children }: PropsWithChildren) => (
   <h3 className="text-lg flex items-center gap-1">{children}</h3>
 );
 
-const ExternalLink = (props: ComponentProps<'a'>) => (
-  <a
-    {...props}
-    rel="noopener noreferrer"
-    className={clsx(props.className, 'hover:underline')}
-  />
-);
 const ExternalLinkList = (props: ComponentProps<'ul'>) => <ul {...props} />;
 const ExternalLinkListItem = ({
   href,
@@ -279,11 +273,15 @@ export default async function Home() {
             <QrCodeImage value="OPENPGP4FPR:04633A858F3F37D549CF30EE307BE088C56B9F0D" />
           </ExternalLink>
           <p>
-            307B E088 C56B 9F0D (or get key on{' '}
+            307B E088 C56B 9F0D (
             <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
               keys.openpgp.org
             </ExternalLink>
-            )
+            から公開鍵を取得できます)
+            <br />
+            <Link href="/verify-pgp" className="hover:underline">
+              署名を確認する
+            </Link>
           </p>
         </Section>
       </div>
