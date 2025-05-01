@@ -272,7 +272,10 @@ export default async function Home() {
         </Section>
         <Section>
           <Heading>PGP key</Heading>
-          <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
+          <ExternalLink
+            href="https://keys.openpgp.org/search?q=307BE088C56B9F0D"
+            className="w-max"
+          >
             <QrCodeImage value="OPENPGP4FPR:04633A858F3F37D549CF30EE307BE088C56B9F0D" />
           </ExternalLink>
           <p>
