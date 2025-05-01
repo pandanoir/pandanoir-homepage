@@ -35,19 +35,19 @@ function copyToClipboard(text: string): Promise<void> {
 }
 
 export const CodeBlock = (props: { children: string }) => (
-  <pre className="bg-gray-300 text-gray-900 px-4 py-2 rounded-sm w-max relative group">
-    <code>
-      {props.children}
-      <button
-        type="button"
-        className="group-hover:block hidden absolute top-1.5 right-1.5 border border-black rounded p-1.5 cursor-pointer"
-        onClick={async () => {
-          await copyToClipboard(props.children);
-          toast('クリップボードにコピーされました');
-        }}
-      >
-        <FaRegCopy size="1.4rem" />
-      </button>
-    </code>
-  </pre>
+  <div className="bg-gray-300 w-min max-w-full text-gray-900 px-4 py-2 rounded-sm relative group">
+    <pre className="overflow-x-scroll">
+      <code>{props.children}</code>
+    </pre>
+    <button
+      type="button"
+      className="group-hover:block hidden absolute top-1.5 right-1.5 border border-black rounded p-1.5 cursor-pointer"
+      onClick={async () => {
+        await copyToClipboard(props.children);
+        toast('クリップボードにコピーされました');
+      }}
+    >
+      <FaRegCopy size="1.4rem" />
+    </button>
+  </div>
 );
