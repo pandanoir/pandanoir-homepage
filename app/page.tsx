@@ -16,6 +16,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from './_components/ui/tooltip';
+import { QrCodeImage } from './_components/QrCodeImage';
 
 const Section = ({ children }: PropsWithChildren) => (
   <div className="flex flex-col bg-slate-700/40 p-3 w-full h-max">
@@ -249,7 +250,6 @@ export default async function Home() {
               <a
                 key={post.title}
                 href={post.link}
-                rel="noreferrer"
                 className={clsx(
                   'w-72',
                   i === 2
@@ -269,6 +269,19 @@ export default async function Home() {
           </div>
           <br />
           <Link href="/posts">read more</Link>
+        </Section>
+        <Section>
+          <Heading>PGP key</Heading>
+          <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
+            <QrCodeImage value="OPENPGP4FPR:04633A858F3F37D549CF30EE307BE088C56B9F0D" />
+          </ExternalLink>
+          <p>
+            307B E088 C56B 9F0D (or get key on{' '}
+            <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
+              keys.openpgp.org
+            </ExternalLink>
+            )
+          </p>
         </Section>
       </div>
     </div>
