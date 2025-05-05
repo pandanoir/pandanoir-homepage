@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
 import { Toaster } from './_components/ui/sonner';
+import { LanguageChangeButton } from './LanguageChangeButton';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,6 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-black ${inter.className}`}>
+        <div className="absolute top-0 right-0">
+          <LanguageChangeButton />
+        </div>
         {children}
         <Toaster />
       </body>
