@@ -20,6 +20,6 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // publicに入ってるものは拡張子が入ってると解釈して(?:ico|png|...)で指定している
-    '/((?!_next|api|static|favicon.ico|prettierrc.sh|.*\\.(?:ico|png|jpe?g|svg|webp|css|js|txt|json)).*)',
+    '/((?!_next|api|static|favicon\\.ico|prettierrc\\.sh|.*\\.(?:ico|png|jpe?g|svg|webp|css|js|txt|json)$).*)',
   ],
 };

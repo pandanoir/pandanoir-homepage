@@ -20,6 +20,7 @@ import { QrCodeImage } from '../_components/QrCodeImage';
 import { ExternalLink } from '../_components/ExternalLink';
 import { getDictionary } from './_dictionaries';
 import { ParamsSchema } from './parseLangParam';
+import { notFound } from 'next/navigation';
 
 const Section = ({ children }: PropsWithChildren) => (
   <div className="flex flex-col bg-slate-700/40 p-3 w-full h-max">
@@ -80,7 +81,12 @@ export default async function Home({
 }: {
   params: Promise<Record<string, unknown>>;
 }) {
-  const { lang } = ParamsSchema.parse(await params);
+  let lang;
+  try {
+    ({ lang } = ParamsSchema.parse(await params));
+  } catch {
+    notFound();
+  }
   const dict = (await getDictionary(lang)).home;
 
   const recentPosts = (await fetchAllFeed()).slice(0, 3);
