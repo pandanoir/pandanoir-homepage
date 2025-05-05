@@ -6,7 +6,7 @@ import { ParamsSchema } from '../parseLangParam';
 export default async function PostPage({
   params,
 }: {
-  params: Promise<unknown>;
+  params: Promise<Record<string, unknown>>;
 }) {
   const { lang } = ParamsSchema.parse(await params);
   return (

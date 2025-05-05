@@ -1,6 +1,13 @@
 import { z } from 'zod';
-import { Article } from '../posts/ArticleList';
 import { XMLParser } from 'fast-xml-parser';
+
+type Article = {
+  title: string;
+  pubDate: Date;
+  link: string;
+  description: string;
+  image: string;
+};
 const parser = new XMLParser({
   ignoreAttributes: false,
 });

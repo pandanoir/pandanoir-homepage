@@ -18,7 +18,7 @@ import {
 } from '../_components/ui/tooltip';
 import { QrCodeImage } from '../_components/QrCodeImage';
 import { ExternalLink } from '../_components/ExternalLink';
-import { getDictionary } from './dictionaries';
+import { getDictionary } from './_dictionaries';
 import { ParamsSchema } from './parseLangParam';
 
 const Section = ({ children }: PropsWithChildren) => (
@@ -75,7 +75,11 @@ const IconLink = ({
   </TooltipProvider>
 );
 
-export default async function Home({ params }: { params: Promise<unknown> }) {
+export default async function Home({
+  params,
+}: {
+  params: Promise<Record<string, unknown>>;
+}) {
   const { lang } = ParamsSchema.parse(await params);
   const dict = (await getDictionary(lang)).home;
 

@@ -2,9 +2,13 @@ import Link from 'next/link';
 import { ExternalLink } from '../../_components/ExternalLink';
 import { CodeBlock } from './CodeBlock';
 import { ParamsSchema } from '../parseLangParam';
-import { getDictionary } from '../dictionaries';
+import { getDictionary } from '../_dictionaries';
 
-export default async function VerifyPgpPage({ params }: { params: unknown }) {
+export default async function VerifyPgpPage({
+  params,
+}: {
+  params: Promise<Record<string, unknown>>;
+}) {
   const { lang } = ParamsSchema.parse(await params);
   const dict = (await getDictionary(lang)).verifyPage;
   return (

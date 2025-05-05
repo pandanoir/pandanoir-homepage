@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-export type Article = {
+type Article = {
   title: string;
   pubDate: Date;
   link: string;
