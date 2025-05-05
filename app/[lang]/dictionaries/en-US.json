@@ -1,0 +1,25 @@
+{
+  "home": {
+    "ウェブフロントエンドエンジニア。ReactとTypeScriptに造詣が深い。": "Web Frontend Engineer with deep expertise in React and TypeScript.",
+    "はてなブログ": "Hatena blog",
+    "職務経歴書": "Resume",
+    "映画": "Movie",
+    "合気道": "Aikido",
+    "ノッキン・オン・ヘブンズ・ドア": "Knockin' on Heaven's Door",
+    "ヒットマンズレクイエム": "In Bruges",
+    "四月の永い夢": "Shigatsu no nagai yume",
+    "レオン": "Léon",
+    "ロッキー3": "Rocky III",
+    "東北大学 電気情報物理工学科 情報学科コース": "B.E. in Computer Science, School of Engineering, Tohoku University",
+    "新潟高校 普通科": "Niigata High School",
+    "署名を確認する": "Verify the signature"
+  },
+  "verifyPage": {
+    "ダウンロードしてきた公開鍵をインポートする": "Import the downloaded public key",
+    "以下の署名されたメッセージを検証する": "Verify the signed message below",
+    "上記手順を行うbashスクリプトも掲載しておきます。": "The Bash script to perform the above steps is also included below.",
+    "公開鍵を取得して一時鍵リングにインポート": "Download the public key and import it into a temporary keyring",
+    "メッセージを検証する": "Verify the message",
+    "一時鍵リングを削除": "Delete the temporary keyring"
+  }
+}

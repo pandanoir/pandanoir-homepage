@@ -8,16 +8,18 @@ import { SiWantedly, SiZenn } from 'react-icons/si';
 import { BsFillPersonLinesFill } from 'react-icons/bs';
 
 import clsx from 'clsx';
-import { fetchAllFeed } from './_utils/fetchAllFeed';
-import { HatenaBlogLogo } from './_components/HatenaBlogLogo';
+import { fetchAllFeed } from '../_utils/fetchAllFeed';
+import { HatenaBlogLogo } from '../_components/HatenaBlogLogo';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from './_components/ui/tooltip';
-import { QrCodeImage } from './_components/QrCodeImage';
-import { ExternalLink } from './_components/ExternalLink';
+} from '../_components/ui/tooltip';
+import { QrCodeImage } from '../_components/QrCodeImage';
+import { ExternalLink } from '../_components/ExternalLink';
+import { getDictionary } from './dictionaries';
+import { ParamsSchema } from './parseLangParam';
 
 const Section = ({ children }: PropsWithChildren) => (
   <div className="flex flex-col bg-slate-700/40 p-3 w-full h-max">
@@ -57,7 +59,7 @@ const IconLink = ({
         <a
           href={href}
           rel="noopener noreferrer"
-          className="hover:underline w-min flex items-center gap-1 p-1.5 bg-slate-900 border border-slate-800 border-2 rounded-md"
+          className="hover:underline w-min flex items-center gap-1 p-1.5 bg-slate-900 border-2 border-slate-800 rounded-md"
         >
           {icon}
           <span className="sr-only">{name}</span>
@@ -73,7 +75,10 @@ const IconLink = ({
   </TooltipProvider>
 );
 
-export default async function Home() {
+export default async function Home({ params }: { params: Promise<unknown> }) {
+  const { lang } = ParamsSchema.parse(await params);
+  const dict = (await getDictionary(lang)).home;
+
   const recentPosts = (await fetchAllFeed()).slice(0, 3);
   return (
     <div className="text-slate-300 w-full max-w-[1680px] place-self-center flex lg:flex-row flex-col gap-3 px-2">
@@ -99,7 +104,11 @@ export default async function Home() {
             pandanoir
           </h1>
           <p className="[grid-area:description]">
-            ウェブフロントエンドエンジニア。ReactとTypeScriptに造詣が深い。
+            {
+              dict[
+                'ウェブフロントエンドエンジニア。ReactとTypeScriptに造詣が深い。'
+              ]
+            }
           </p>
           <ul className="flex gap-2 [grid-area:links]">
             <li>
@@ -121,7 +130,7 @@ export default async function Home() {
                     viewBox="51 51 198 198"
                   />
                 }
-                name="はてなブログ"
+                name={dict['はてなブログ']}
               />
             </li>
             <li>
@@ -149,7 +158,7 @@ export default async function Home() {
               <IconLink
                 href="https://resume.pandanoir.net/"
                 icon={<BsFillPersonLinesFill size="1.3rem" />}
-                name="職務経歴書"
+                name={dict['職務経歴書']}
               />
             </li>
           </ul>
@@ -164,8 +173,8 @@ export default async function Home() {
                 <FaGamepad /> Hobbies
               </SubHeading>
               <ExternalLinkList className="pl-3">
-                <li>映画</li>
-                <li>合気道</li>
+                <li>{dict['映画']}</li>
+                <li>{dict['合気道']}</li>
               </ExternalLinkList>
             </div>
             <div>
@@ -174,19 +183,19 @@ export default async function Home() {
               </SubHeading>
               <ExternalLinkList className="pl-3">
                 <ExternalLinkListItem href="https://www.imdb.com/title/tt0119472/">
-                  ノッキン・オン・ヘブンズ・ドア
+                  {dict['ノッキン・オン・ヘブンズ・ドア']}
                 </ExternalLinkListItem>
                 <ExternalLinkListItem href="https://www.imdb.com/title/tt0780536/">
-                  ヒットマンズレクイエム
+                  {dict['ヒットマンズレクイエム']}
                 </ExternalLinkListItem>
                 <ExternalLinkListItem href="https://www.imdb.com/title/tt7085058/">
-                  四月の永い夢
+                  {dict['四月の永い夢']}
                 </ExternalLinkListItem>
                 <ExternalLinkListItem href="https://www.imdb.com/title/tt0110413/">
-                  レオン
+                  {dict['レオン']}
                 </ExternalLinkListItem>
                 <ExternalLinkListItem href="https://www.imdb.com/title/tt0084602/">
-                  ロッキー3
+                  {dict['ロッキー3']}
                 </ExternalLinkListItem>
               </ExternalLinkList>
             </div>
@@ -233,8 +242,10 @@ export default async function Home() {
         <Section>
           <Heading>Education</Heading>
           <ul className="pl-3">
-            <li>2016-2020 東北大学 工学部 電気情報物理工学科 情報工学コース</li>
-            <li>2013-2016 新潟高校 普通科</li>
+            <li>
+              2016-2020 {dict['東北大学 電気情報物理工学科 情報学科コース']}
+            </li>
+            <li>2013-2016 {dict['新潟高校 普通科']}</li>
           </ul>
         </Section>
         <Section>
@@ -262,7 +273,7 @@ export default async function Home() {
             ))}
           </div>
           <br />
-          <Link href="/posts">read more</Link>
+          <Link href={`/${lang}/posts`}>read more</Link>
         </Section>
         <Section>
           <Heading>PGP key</Heading>
@@ -274,13 +285,26 @@ export default async function Home() {
           </ExternalLink>
           <p>
             307B E088 C56B 9F0D (
-            <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
-              keys.openpgp.org
-            </ExternalLink>
-            から公開鍵を取得できます)
+            {lang === 'en-us' ? (
+              <>
+                The public key is available at{' '}
+                <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
+                  keys.openpgp.org
+                </ExternalLink>
+                .
+              </>
+            ) : (
+              <>
+                <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
+                  keys.openpgp.org
+                </ExternalLink>
+                から公開鍵を取得できます
+              </>
+            )}
+            )
             <br />
-            <Link href="/verify-pgp" className="hover:underline">
-              署名を確認する
+            <Link href={`/${lang}/verify-pgp`} className="hover:underline">
+              {dict['署名を確認する']}
             </Link>
           </p>
         </Section>
