@@ -36,7 +36,7 @@ function copyToClipboard(text: string): Promise<void> {
 
 export const CodeBlock = (props: { children: string }) => (
   <div className="bg-gray-300 w-min max-w-full text-gray-900 px-4 py-2 rounded-sm relative group">
-    <pre className="overflow-x-scroll">
+    <pre className="overflow-x-auto">
       <code>{props.children}</code>
     </pre>
     <button
