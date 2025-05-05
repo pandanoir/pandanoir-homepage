@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const locales = ['en-us', 'en', 'ja'] as const;
+const locales = ['en', 'ja'] as const;
 const secondsPerYear = 60 * 60 * 24 * 365;
 
 // ロケール関連の処理をしている(リダイレクトする、cookieにロケールをセットする)
@@ -19,12 +19,6 @@ export function middleware(request: NextRequest) {
     );
     response.cookies.set('locale', 'ja', { path: '/', maxAge: secondsPerYear });
     return response;
-  }
-  if (localeInPathname === 'en-us') {
-    // en-us locale は en に統合する
-    return NextResponse.redirect(
-      new URL(pathname.replace(/^\/en-us/i, '/en'), origin),
-    );
   }
   if (localeInPathname === 'en') {
     // en locale はそのまま返す
@@ -49,7 +43,10 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // publicに入ってるものは拡張子が入ってると解釈して(?:ico|png|...)で指定している
+    /*
+     * [lang]ルーティングに入れたくないので除外している
+     * publicに入ってるものも、拡張子が入ってる=publicとみなして除外している
+     */
     '/((?!_next|api|static|favicon\\.ico|prettierrc\\.sh|.*\\.(?:ico|png|jpe?g|svg|webp|css|js|txt|json)$).*)',
   ],
 };
