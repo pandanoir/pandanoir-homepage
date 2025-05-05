@@ -18,7 +18,7 @@ export default async function VerifyPgpPage({
       </h1>
       <h2 className="text-4xl">Verify PGP</h2>
       <p>
-        {lang === 'en-us' ? (
+        {lang === 'en' ? (
           <>
             Below are the steps to verify{' '}
             <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
@@ -26,31 +26,35 @@ export default async function VerifyPgpPage({
             </ExternalLink>
             .
           </>
-        ) : (
+        ) : lang === 'ja' ? (
           <>
             <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
               pandanoirのPGP公開鍵
             </ExternalLink>{' '}
             の検証手順は以下のとおりです
           </>
+        ) : (
+          (lang satisfies never)
         )}
       </p>
       <ol className="list-decimal list-inside">
         <li>
-          {lang === 'en-us' ? (
+          {lang === 'en' ? (
             <>
               Download{' '}
               <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
                 pandanoir&apos;s public key
               </ExternalLink>
             </>
-          ) : (
+          ) : lang === 'ja' ? (
             <>
               <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
                 pandanoirの公開鍵
               </ExternalLink>
               をダウンロードする
             </>
+          ) : (
+            (lang satisfies never)
           )}
         </li>
         <li>

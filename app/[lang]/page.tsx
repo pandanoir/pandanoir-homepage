@@ -295,7 +295,7 @@ export default async function Home({
           </ExternalLink>
           <p>
             307B E088 C56B 9F0D (
-            {lang === 'en-us' ? (
+            {lang === 'en' ? (
               <>
                 The public key is available at{' '}
                 <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
@@ -303,13 +303,15 @@ export default async function Home({
                 </ExternalLink>
                 .
               </>
-            ) : (
+            ) : lang === 'ja' ? (
               <>
                 <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
                   keys.openpgp.org
                 </ExternalLink>
                 から公開鍵を取得できます
               </>
+            ) : (
+              (lang satisfies never)
             )}
             )
             <br />

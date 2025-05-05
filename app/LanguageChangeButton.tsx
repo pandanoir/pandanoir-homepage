@@ -8,9 +8,20 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { IoLanguage } from 'react-icons/io5';
+import { locales } from './[lang]/_dictionaries/locales';
 
 export const LanguageChangeButton = () => {
-  const pathnameWithoutLang = usePathname().replace(/^\/(en-us|ja)/i, '');
+  const pathname = usePathname();
+  const localeInPathname = locales.find(
+    (locale) =>
+      pathname.toLowerCase().startsWith(`/${locale}/`) ||
+      pathname.toLowerCase() === `/${locale}`,
+  );
+  const pathnameWithoutLang = pathname.replace(
+    new RegExp(`^/${localeInPathname}`, 'i'),
+    '',
+  );
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -20,10 +31,10 @@ export const LanguageChangeButton = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem asChild>
-          <Link href={`/en-US${pathnameWithoutLang}`}>English</Link>
+          <Link href={`/en${pathnameWithoutLang}`}>English</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href={pathnameWithoutLang || '/'}>日本語</Link>
+          <Link href={`/ja${pathnameWithoutLang}`}>日本語</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

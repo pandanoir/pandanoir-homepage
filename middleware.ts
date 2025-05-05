@@ -1,17 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+const locales = ['en-us', 'en', 'ja'] as const;
+
 export function middleware(request: NextRequest) {
   const { pathname, origin } = request.nextUrl;
+  const localeInPathname = locales.find(
+    (locale) =>
+      pathname.toLowerCase().startsWith(`/${locale}/`) ||
+      pathname.toLowerCase() === `/${locale}`,
+  );
 
   // ja locale はリダイレクトする
-  if (pathname.toLowerCase().startsWith('/ja')) {
-    const redirectUrl = new URL(pathname.replace(/^\/ja(\/|$)/, '/'), origin);
-    return NextResponse.redirect(redirectUrl);
+  if (localeInPathname === 'ja') {
+    return NextResponse.redirect(
+      new URL(pathname.replace(/^\/ja(\/|$)/, '/'), origin),
+    );
   }
-  // en-us locale はそのまま返す
-  if (/^\/en-us(\/|$)/i.test(pathname)) {
+  // en locale はそのまま返す
+  if (localeInPathname === 'en') {
     return NextResponse.next();
   }
+  // en-us locale は en に統合
+  if (localeInPathname === 'en-us') {
+    return NextResponse.redirect(
+      new URL(pathname.replace(/^\/en-us/i, '/en'), origin),
+    );
+  }
+
   // デフォではja localeと解釈する
   const redirectUrl = new URL(`/ja${pathname}`, origin);
   return NextResponse.rewrite(redirectUrl);
