@@ -1,10 +1,11 @@
 'use client';
 import { HatenaBlogLogo } from '@/app/_components/HatenaBlogLogo';
 import { useState } from 'react';
+import { FaBuilding } from 'react-icons/fa6';
 import { SiZenn } from 'react-icons/si';
 
 type Article = {
-  source: 'hatena blog' | 'zenn';
+  source: 'hatena blog' | 'zenn' | 'company';
   title: string;
   pubDate: Date;
   link: string;
@@ -42,6 +43,7 @@ export const ArticleList = ({ posts }: { posts: Article[] }) => {
                     {
                       'hatena blog': <HatenaBlogLogo width="1rem" />,
                       zenn: <SiZenn size="1rem" />,
+                      company: <FaBuilding size="1rem" />,
                     }[x.source]
                   }
                 </span>

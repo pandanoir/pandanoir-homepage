@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ComponentProps, PropsWithChildren, ReactNode } from 'react';
 import { FaFilm, FaGamepad, FaMusic, FaYoutube } from 'react-icons/fa';
-import { FaXTwitter } from 'react-icons/fa6';
+import { FaBuilding, FaXTwitter } from 'react-icons/fa6';
 import { FiGithub } from 'react-icons/fi';
 import { SiWantedly, SiZenn } from 'react-icons/si';
 import { BsFillPersonLinesFill } from 'react-icons/bs';
@@ -275,6 +275,7 @@ export default async function Home({
                     {
                       'hatena blog': <HatenaBlogLogo width="1rem" />,
                       zenn: <SiZenn size="1rem" />,
+                      company: <FaBuilding size="1rem" />,
                     }[post.source]
                   }
                 </span>
