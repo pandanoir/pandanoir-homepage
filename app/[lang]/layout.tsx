@@ -1,5 +1,5 @@
 import { Toaster } from '../_components/ui/sonner';
-import { LanguageChangeButton } from '../LanguageChangeButton';
+import { LanguageChangeButton } from './LanguageChangeButton';
 import { PropsWithChildren } from 'react';
 import { ParamsSchema } from './parseLangParam';
 import { notFound } from 'next/navigation';

@@ -4,11 +4,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from './_components/ui/dropdown-menu';
+} from '../_components/ui/dropdown-menu';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { IoLanguage } from 'react-icons/io5';
-import { locales } from './[lang]/_dictionaries/locales';
+import { locales } from './_dictionaries/locales';
 
 export const LanguageChangeButton = () => {
   const pathname = usePathname();
