@@ -131,15 +131,7 @@ export default async function Home({
             <li>
               <IconLink
                 href="https://pandanoir.info"
-                icon={
-                  <HatenaBlogLogo
-                    width="1.3rem"
-                    height="1.3rem"
-                    stroke="currentColor"
-                    fill="currentColor"
-                    viewBox="51 51 198 198"
-                  />
-                }
+                icon={<HatenaBlogLogo width="1.3rem" height="1.3rem" />}
                 name={dict['はてなブログ']}
               />
             </li>
@@ -278,6 +270,14 @@ export default async function Home({
                   className="w-72 aspect-ogp object-cover rounded"
                   alt=""
                 />
+                <span className="inline-block align-middle mr-1">
+                  {
+                    {
+                      'hatena blog': <HatenaBlogLogo width="1rem" />,
+                      zenn: <SiZenn size="1rem" />,
+                    }[post.source]
+                  }
+                </span>
                 {post.title}
               </a>
             ))}

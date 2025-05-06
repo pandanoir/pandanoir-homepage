@@ -1,7 +1,10 @@
 'use client';
+import { HatenaBlogLogo } from '@/app/_components/HatenaBlogLogo';
 import { useState } from 'react';
+import { SiZenn } from 'react-icons/si';
 
 type Article = {
+  source: 'hatena blog' | 'zenn';
   title: string;
   pubDate: Date;
   link: string;
@@ -34,6 +37,14 @@ export const ArticleList = ({ posts }: { posts: Article[] }) => {
             )}
             <div className="px-2 py-1">
               <span suppressHydrationWarning={true} className="font-bold">
+                <span className="inline-block align-middle mr-1">
+                  {
+                    {
+                      'hatena blog': <HatenaBlogLogo width="1rem" />,
+                      zenn: <SiZenn size="1rem" />,
+                    }[x.source]
+                  }
+                </span>
                 {x.title}
               </span>
               <br />
