@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { IoLanguage } from 'react-icons/io5';
 import { locales } from './_dictionaries/locales';
+import { FaCheck } from 'react-icons/fa6';
 
 export const LanguageChangeButton = () => {
   const pathname = usePathname();
@@ -31,10 +32,14 @@ export const LanguageChangeButton = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem asChild>
-          <Link href={`/en${pathnameWithoutLang}`}>English</Link>
+          <Link href={`/en${pathnameWithoutLang}`}>
+            English {localeInPathname === 'en' && <FaCheck />}
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href={`/ja${pathnameWithoutLang}`}>日本語</Link>
+          <Link href={`/ja${pathnameWithoutLang}`}>
+            日本語 {(localeInPathname ?? 'ja') === 'ja' && <FaCheck />}
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
