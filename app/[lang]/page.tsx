@@ -207,16 +207,16 @@ export default async function Home({
               </SubHeading>
               <ExternalLinkList className="pl-3">
                 <ExternalLinkListItem href="https://open.spotify.com/intl-ja/artist/012ldd58H1N5UZLxjMzV29?si=XJEJ9We_QXOwMXovcm285g">
-                  泉まくら
+                  {dict['泉まくら']}
                 </ExternalLinkListItem>
                 <ExternalLinkListItem href="https://open.spotify.com/intl-ja/artist/1bj13qFAwnyM3ILOiFnn1Y?si=lZNcP9ecSFG5S-ia0sJTyA">
-                  相対性理論
+                  {dict['相対性理論']}
                 </ExternalLinkListItem>
                 <ExternalLinkListItem href="https://open.spotify.com/intl-ja/artist/1mN9lPKzTRTOop4u7S1Uy9?si=CuSKWNGyR6e2syiQAfEH5g">
                   iri
                 </ExternalLinkListItem>
                 <ExternalLinkListItem href="https://open.spotify.com/intl-ja/artist/3rTxb36W3M1BCxx00iiwMU?si=LF8usd58SpKbbHRR7Otuww">
-                  空音
+                  {dict['空音']}
                 </ExternalLinkListItem>
                 <ExternalLinkListItem href="https://open.spotify.com/intl-ja/artist/58oPVy7oihAEXE0Ott6JOf?si=u6_r0Q8pSHa8i9QxHKk7lg">
                   Eve
