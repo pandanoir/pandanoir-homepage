@@ -89,7 +89,7 @@ export default async function Home({
   }
   const dict = (await getDictionary(lang)).home;
 
-  const recentPosts = (await fetchAllFeed()).slice(0, 3);
+  const recentPosts = (await fetchAllFeed()).slice(0, 5);
   return (
     <div className="text-slate-300 w-full max-w-[1680px] place-self-center flex lg:flex-row flex-col gap-3 px-2">
       <div className="flex-2 max-h-screen flex items-center">
@@ -252,39 +252,45 @@ export default async function Home({
         </Section>
         <Section>
           <Heading>Recent posts</Heading>
-          <div className="flex gap-4 @container">
-            {recentPosts.map((post, i) => (
-              <a
-                key={post.title}
-                href={post.link}
-                className={clsx(
-                  'w-72',
-                  i === 2
-                    ? 'hidden @4xl:block'
-                    : i === 1 && 'hidden @2xl:block',
-                )}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={post.image}
-                  className="w-72 aspect-ogp object-cover rounded"
-                  alt=""
-                />
-                <span className="inline-block align-middle mr-1">
-                  {
-                    {
-                      'hatena blog': <HatenaBlogLogo width="1rem" />,
-                      zenn: <SiZenn size="1rem" />,
-                      company: <FaBuilding size="1rem" />,
-                    }[post.source]
-                  }
-                </span>
-                {post.title}
-              </a>
+          <ul className="flex flex-col gap-1">
+            {recentPosts.map((post) => (
+              <li key={post.title}>
+                <a
+                  href={post.link}
+                  className="hover:underline rounded-sm px-1 py-0.5"
+                >
+                  <span className="pl-4 mr-1 relative">
+                    <span
+                      className={clsx(
+                        'absolute p-0.5 -left-0.5 top-1/2 -mt-2.5 rounded-full',
+                        {
+                          zenn: 'bg-[#3EA8FF] text-gray-900',
+                          'hatena blog': 'bg-gray-300 text-gray-800',
+                          company: 'bg-emerald-300 text-gray-800',
+                        }[post.source],
+                      )}
+                    >
+                      {
+                        {
+                          'hatena blog': <HatenaBlogLogo width="1rem" />,
+                          zenn: <SiZenn size="1rem" />,
+                          company: <FaBuilding size="1rem" />,
+                        }[post.source]
+                      }
+                    </span>
+                  </span>
+                  {post.title}
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
           <br />
-          <Link href={`/${lang}/posts`}>read more</Link>
+          <Link
+            href={`/${lang}/posts`}
+            className="text-blue-400 underline hover:text-blue-200"
+          >
+            read more
+          </Link>
         </Section>
         <Section>
           <Heading>PGP key</Heading>
