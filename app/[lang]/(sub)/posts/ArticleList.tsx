@@ -68,10 +68,12 @@ export const ArticleList = ({ posts }: { posts: Article[] }) => {
             ))}
           </ul>
           {i !== Object.keys(postsByYear).length - 1 && (
-            <div className="max-w-256 grid grid-cols-[1fr_max-content_1fr] items-center gap-2">
-              <div className="bg-gray-300 h-[1px]" />
+            <div
+              className="max-w-256 flex place-items-center gap-2
+                after:flex-1 after:border-t after:border-gray-300
+                before:flex-1 before:border-t before:border-gray-300"
+            >
               <div>{year}年</div>
-              <div className="bg-gray-300 h-[1px]" />
             </div>
           )}
         </>

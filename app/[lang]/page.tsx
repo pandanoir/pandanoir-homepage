@@ -94,14 +94,12 @@ export default async function Home({
     <div className="text-slate-300 w-full max-w-[1680px] place-self-center flex lg:flex-row flex-col gap-3 px-2">
       <div className="flex-2 max-h-screen flex items-center">
         <div
-          className={clsx(
-            'grid justify-center max-h-screen h-max gap-y-3 gap-x-2 p-3',
-            `sm:[grid-template-areas:'icon_name''icon_description''links_links']`,
-            'sm:grid-cols-[max-content_1fr]',
-            `[grid-template-areas:'name''description''links']`,
-            'grid-rows-[repeat(3,min-content)]',
-            'grid-cols-1',
-          )}
+          className="grid justify-center max-h-screen h-max gap-y-3 gap-x-2 p-3
+            sm:[grid-template-areas:'icon_name''icon_description''links_links']
+            sm:grid-cols-[max-content_1fr]
+            [grid-template-areas:'name''description''links']
+            grid-rows-[repeat(3,min-content)]
+            grid-cols-1"
         >
           <Image
             src="/logo-black.png"
