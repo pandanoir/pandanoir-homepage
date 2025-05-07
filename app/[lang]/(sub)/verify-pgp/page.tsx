@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { ExternalLink } from '../../_components/ExternalLink';
+import { ExternalLink } from '../../../_components/ExternalLink';
 import { CodeBlock } from './CodeBlock';
-import { ParamsSchema } from '../parseLangParam';
-import { getDictionary } from '../_dictionaries';
+import { ParamsSchema } from '../../parseLangParam';
+import { getDictionary } from '../../_dictionaries';
 
 export default async function VerifyPgpPage({
   params,
@@ -12,7 +12,7 @@ export default async function VerifyPgpPage({
   const { lang } = ParamsSchema.parse(await params);
   const dict = (await getDictionary(lang)).verifyPage;
   return (
-    <div className="text-slate-300 px-8 flex flex-col justify-center gap-3 sm:gap-4">
+    <div className="text-slate-300 px-8 mb-8 flex flex-col justify-center gap-3 sm:gap-4">
       <h1 className="flex-none text-5xl sm:text-6xl font-bold">
         <Link href={`/${lang}`}>pandanoir</Link>
       </h1>
