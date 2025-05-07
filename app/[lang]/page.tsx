@@ -2,13 +2,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ComponentProps, PropsWithChildren, ReactNode } from 'react';
 import { FaFilm, FaGamepad, FaMusic, FaYoutube } from 'react-icons/fa';
-import { FaBuilding, FaXTwitter } from 'react-icons/fa6';
+import { FaXTwitter } from 'react-icons/fa6';
 import { FiGithub } from 'react-icons/fi';
 import { SiWantedly, SiZenn } from 'react-icons/si';
 import { BsFillPersonLinesFill } from 'react-icons/bs';
 
-import clsx from 'clsx';
-import { fetchAllFeed } from '../_utils/fetchAllFeed';
 import { HatenaBlogLogo } from '../_components/HatenaBlogLogo';
 import {
   Tooltip,
@@ -22,6 +20,11 @@ import { getDictionary } from './_dictionaries';
 import { ParamsSchema } from './parseLangParam';
 import { notFound } from 'next/navigation';
 import { locales } from './_dictionaries/locales';
+import dynamic from 'next/dynamic';
+const RecentPosts = dynamic(
+  async () => (await import('./RecentPosts')).RecentPosts,
+  { loading: () => 'loading...' },
+);
 
 const Section = ({ children }: PropsWithChildren) => (
   <div className="flex flex-col bg-slate-700/40 p-3 w-full h-max">
@@ -94,7 +97,6 @@ export default async function Home({
   }
   const dict = (await getDictionary(lang)).home;
 
-  const recentPosts = (await fetchAllFeed()).slice(0, 5);
   return (
     <div className="text-slate-300 w-full max-w-[1680px] place-self-center flex lg:flex-row flex-col gap-3 px-2">
       <div className="flex-2 max-h-screen flex items-center">
@@ -255,38 +257,7 @@ export default async function Home({
         </Section>
         <Section>
           <Heading>Recent posts</Heading>
-          <ul className="flex flex-col gap-1">
-            {recentPosts.map((post) => (
-              <li key={post.title}>
-                <a
-                  href={post.link}
-                  className="hover:underline rounded-sm px-1 py-0.5"
-                >
-                  <span className="pl-4 mr-1 relative">
-                    <span
-                      className={clsx(
-                        'absolute p-0.5 -left-0.5 top-1/2 -mt-2.5 rounded-full',
-                        {
-                          zenn: 'bg-[#3EA8FF] text-gray-900',
-                          'hatena blog': 'bg-gray-300 text-gray-800',
-                          company: 'bg-emerald-300 text-gray-800',
-                        }[post.source],
-                      )}
-                    >
-                      {
-                        {
-                          'hatena blog': <HatenaBlogLogo width="1rem" />,
-                          zenn: <SiZenn size="1rem" />,
-                          company: <FaBuilding size="1rem" />,
-                        }[post.source]
-                      }
-                    </span>
-                  </span>
-                  {post.title}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <RecentPosts />
           <br />
           <Link
             href={`/${lang}/posts`}
