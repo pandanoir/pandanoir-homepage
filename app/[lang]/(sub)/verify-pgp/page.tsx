@@ -2,6 +2,11 @@ import { ExternalLink } from '../../../_components/ExternalLink';
 import { CodeBlock } from './CodeBlock';
 import { ParamsSchema } from '../../parseLangParam';
 import { getDictionary } from '../../_dictionaries';
+import { locales } from '../../_dictionaries/locales';
+
+export function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
 
 export default async function VerifyPgpPage({
   params,

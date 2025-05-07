@@ -21,6 +21,7 @@ import { ExternalLink } from '../_components/ExternalLink';
 import { getDictionary } from './_dictionaries';
 import { ParamsSchema } from './parseLangParam';
 import { notFound } from 'next/navigation';
+import { locales } from './_dictionaries/locales';
 
 const Section = ({ children }: PropsWithChildren) => (
   <div className="flex flex-col bg-slate-700/40 p-3 w-full h-max">
@@ -75,6 +76,10 @@ const IconLink = ({
     </Tooltip>
   </TooltipProvider>
 );
+
+export function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
 
 export default async function Home({
   params,

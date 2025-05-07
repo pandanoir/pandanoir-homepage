@@ -1,6 +1,10 @@
 import { fetchAllFeed } from '../../../_utils/fetchAllFeed';
+import { locales } from '../../_dictionaries/locales';
 import { ArticleList } from './ArticleList';
 
+export function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
 export default async function PostPage() {
   return (
     <>
