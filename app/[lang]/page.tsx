@@ -20,6 +20,7 @@ import { getDictionary } from './_dictionaries';
 import { ParamsSchema } from './parseLangParam';
 import { notFound } from 'next/navigation';
 import { locales } from './_dictionaries/locales';
+import { promises as fs } from 'fs';
 import dynamic from 'next/dynamic';
 const RecentPosts = dynamic(
   async () => (await import('./RecentPosts')).RecentPosts,
@@ -95,7 +96,10 @@ export default async function Home({
   } catch {
     notFound();
   }
-  const dict = (await getDictionary(lang)).home;
+  const [dict, signedMessage] = await Promise.all([
+    getDictionary(lang).then((mod) => mod.home),
+    fs.readFile(`${process.cwd()}/public/signed-message.txt`, 'utf8'),
+  ]);
 
   return (
     <div className="text-slate-300 w-full max-w-[1680px] place-self-center flex lg:flex-row flex-col gap-3 px-2">
@@ -303,9 +307,21 @@ export default async function Home({
             )}
             )
             <br />
-            <Link href={`/${lang}/verify-pgp`} className="hover:underline">
-              {dict['署名を確認する']}
-            </Link>
+            {dict['署名を確認する']}
+            <ul className="list-disc list-inside">
+              <li>
+                <ExternalLink
+                  href={`https://keybase.io/verify?msg=${encodeURIComponent(signedMessage)}`}
+                >
+                  {dict['keybase']}
+                </ExternalLink>
+              </li>
+              <li>
+                <Link href={`/${lang}/verify-pgp`} className="hover:underline">
+                  {dict['手動']}
+                </Link>
+              </li>
+            </ul>
           </p>
         </Section>
       </div>
