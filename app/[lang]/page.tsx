@@ -4,7 +4,7 @@ import { ComponentProps, PropsWithChildren, ReactNode } from 'react';
 import { FaFilm, FaGamepad, FaMusic, FaYoutube } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { FiGithub } from 'react-icons/fi';
-import { SiWantedly, SiZenn } from 'react-icons/si';
+import { SiKeybase, SiWantedly, SiZenn } from 'react-icons/si';
 import { BsFillPersonLinesFill } from 'react-icons/bs';
 
 import { HatenaBlogLogo } from '../_components/HatenaBlogLogo';
@@ -159,6 +159,13 @@ export default async function Home({
                 href="https://www.wantedly.com/id/naoto_ikuno"
                 icon={<SiWantedly size="1.3rem" />}
                 name="Wantedly"
+              />
+            </li>
+            <li>
+              <IconLink
+                href="https://keybase.io/pandanoir"
+                icon={<SiKeybase size="1.3rem" />}
+                name="Keybase"
               />
             </li>
             <li>
