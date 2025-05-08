@@ -1,0 +1,63 @@
+==================================================================
+https://keybase.io/pandanoir
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://www.pandanoir.net
+  * I am pandanoir (https://keybase.io/pandanoir) on keybase.
+  * I have a public key with fingerprint 0463 3A85 8F3F 37D5 49CF  30EE 307B E088 C56B 9F0D
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "011642072774d5eee8159fd217e12a7e1af194479ca35fec6a8038c332ce8a8210350a",
+      "fingerprint": "04633a858f3f37d549cf30ee307be088c56b9f0d",
+      "host": "keybase.io",
+      "key_id": "307be088c56b9f0d",
+      "kid": "011642072774d5eee8159fd217e12a7e1af194479ca35fec6a8038c332ce8a8210350a",
+      "uid": "20326b70a32e40552a85b30143eea419",
+      "username": "pandanoir"
+    },
+    "service": {
+      "hostname": "www.pandanoir.net",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1746688569,
+  "expire_in": 157680000,
+  "prev": "762bf3f113b82515cbd748b827b4be3346434366906c6a92b83e1a4104234fce",
+  "seqno": 4,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+
+owGtUr9rFEEY3Ziz8MgRi3CNUXBsj2N+z+wqWFhZWAsqnjO7316WS3bX3b27xDMI
+guRQxGBpI/gPqF2wVFKIhZWdYIoUplEI1uLskVhZOsX8+Oa9N+97zHZr3mu28WRv
+ujt42Zr7dGC9leUbFyfIZtEGCiZoALMFViMoq94giVCAMCGSU6yoUjwSAKCJ8OOI
+EgWEGjeZmPicKz80TMQQSqMx0yFjNARtNCWYCWxQB8VJ2ociL5K0qmW5ZMxooWMW
+MxUJ7ocxwwAMKwtY61BI68c4csSVrKwZzpw1JXSTzNXcoTez9w/8f/Y9nMlRzKi0
+ChtGgWMhqPNuGSacARhO/BpYQpGaNXDo3KSRSbOkQJsd5MqjJIQ62bqVI8h4PO7+
+hXVTqJxCXmRVFmar7nqlqvIyqOnVRj7Dg+0dKfVskkYuTccYQVEmWYoC4pBhldTS
+RHEptRbS7yBYz5MCekmNEEpq7Eb9DoycpLotqXX5E8KspoKI0EaKa7dXlltgjEvO
+OJPSx9Ll41OrmcuNE8wp47FrqW7ubpqhgDufpu80y6SfmmpYANpsTocNr930zrbP
+Nxph8OjZZfXl6mf84/gDnjxR/z6veer0ceX9/Jy3u3P4Zq/5FS1fmm7hM6+XPtx8
+svhisbX16tw1b+fh44/eb720b7/fv3fl3cLb9Z8P8Pb1W+zC8/1f5drhN+/g6Z2F
+Pw==
+=+yNi
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/pandanoir
+
+==================================================================
+
