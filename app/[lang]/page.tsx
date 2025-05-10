@@ -40,7 +40,7 @@ const RecentPosts = dynamic(
 );
 
 const Section = ({ children }: PropsWithChildren) => (
-  <div className="flex flex-col bg-slate-700/40 p-3 w-full h-max">
+  <div className="flex flex-col bg-slate-700/40 px-3 pt-3 pb-6 w-full h-max">
     {children}
   </div>
 );
@@ -118,7 +118,7 @@ export default async function Home({
       <div className="flex lg:flex-row flex-col gap-3">
         <div className="flex-2 max-h-screen flex items-center">
           <div
-            className="grid justify-center max-h-screen h-max gap-y-3 gap-x-2 p-3
+            className="grid justify-center max-h-screen h-max gap-y-3 gap-x-2 p-3 pt-6 sm:pt-3
             sm:[grid-template-areas:'icon_name''icon_description''links_links']
             sm:grid-cols-[max-content_1fr]
             [grid-template-areas:'name''description''links']
@@ -132,7 +132,7 @@ export default async function Home({
               alt=""
               className="sm:block hidden w-36 h-36 rounded-full [grid-area:icon]"
             />
-            <h1 className="text-5xl sm:text-6xl font-bold self-end [grid-area:name]">
+            <h1 className="text-6xl font-bold self-end [grid-area:name]">
               pandanoir
             </h1>
             <p className="[grid-area:description]">
@@ -195,7 +195,7 @@ export default async function Home({
             </ul>
           </div>
         </div>
-        <div className="flex-3 flex flex-col gap-3">
+        <div className="flex-3 flex flex-col gap-4">
           <Section>
             <Heading>Profile</Heading>
             <div className="flex flex-col gap-3">
@@ -314,24 +314,24 @@ export default async function Home({
               )
               <br />
               {dict['署名を確認する']}
-              <ul className="list-disc list-inside">
-                <li>
-                  <ExternalLink
-                    href={`https://keybase.io/verify?msg=${encodeURIComponent(signedMessage)}`}
-                  >
-                    {dict['keybase']}
-                  </ExternalLink>
-                </li>
-                <li>
-                  <Link
-                    href={`/${lang}/verify-pgp`}
-                    className="hover:underline hover:text-sky-300 text-sky-500"
-                  >
-                    {dict['手動']}
-                  </Link>
-                </li>
-              </ul>
             </p>
+            <ul className="list-disc list-inside">
+              <li>
+                <ExternalLink
+                  href={`https://keybase.io/verify?msg=${encodeURIComponent(signedMessage)}`}
+                >
+                  {dict['keybase']}
+                </ExternalLink>
+              </li>
+              <li>
+                <Link
+                  href={`/${lang}/verify-pgp`}
+                  className="hover:underline hover:text-sky-300 text-sky-500"
+                >
+                  {dict['手動']}
+                </Link>
+              </li>
+            </ul>
           </Section>
         </div>
       </div>
