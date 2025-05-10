@@ -23,9 +23,20 @@ import { locales } from './_dictionaries/locales';
 import { RichText } from './RichText';
 import { promises as fs } from 'fs';
 import dynamic from 'next/dynamic';
+import { Skeleton } from '../_components/ui/skeleton';
 const RecentPosts = dynamic(
   async () => (await import('./RecentPosts')).RecentPosts,
-  { loading: () => 'loading...' },
+  {
+    loading: () => (
+      <div className="flex flex-col gap-3">
+        <Skeleton className="h-4.5 w-72" />
+        <Skeleton className="h-4.5 w-72" />
+        <Skeleton className="h-4.5 w-72" />
+        <Skeleton className="h-4.5 w-72" />
+        <Skeleton className="h-4.5 w-72" />
+      </div>
+    ),
+  },
 );
 
 const Section = ({ children }: PropsWithChildren) => (
@@ -127,7 +138,7 @@ export default async function Home({
             <p className="[grid-area:description]">
               {
                 dict[
-                  'ウェブフロントエンドエンジニア。ReactとTypeScriptに造詣が深い。'
+                'ウェブフロントエンドエンジニア。ReactとTypeScriptに造詣が深い。'
                 ]
               }
             </p>
