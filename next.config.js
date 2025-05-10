@@ -1,3 +1,5 @@
+import { execSync } from 'child_process';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async redirects() {
@@ -17,6 +19,9 @@ const nextConfig = {
       },
     ];
   },
+  env: {
+    COMMIT_ID: execSync('git rev-parse --short HEAD').toString().trim(),
+  },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
