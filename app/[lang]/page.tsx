@@ -273,7 +273,7 @@ export default async function Home({
           <br />
           <Link
             href={`/${lang}/posts`}
-            className="text-blue-400 underline hover:text-blue-200"
+            className="hover:underline hover:text-sky-300 text-sky-500"
           >
             read more
           </Link>
@@ -311,7 +311,10 @@ export default async function Home({
                 </ExternalLink>
               </li>
               <li>
-                <Link href={`/${lang}/verify-pgp`} className="hover:underline">
+                <Link
+                  href={`/${lang}/verify-pgp`}
+                  className="hover:underline hover:text-sky-300 text-sky-500"
+                >
                   {dict['手動']}
                 </Link>
               </li>
