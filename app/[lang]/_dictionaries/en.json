@@ -12,6 +12,7 @@
     "ロッキー3": "Rocky III",
     "東北大学 電気情報物理工学科 情報学科コース": "B.E. in Computer Science, School of Engineering, Tohoku University",
     "新潟高校 普通科": "Niigata High School",
+    "<link>keys.openpgp.org</link>から公開鍵を取得できます": "The public key is available at <link>keys.openpgp.org</link>.",
     "署名を確認する": "Verify the signature",
     "手動": "manually",
     "keybase": "using Keybase",
@@ -20,6 +21,8 @@
     "空音": "SORANE"
   },
   "verifyPage": {
+    "<link>pandanoirのPGP公開鍵</link> の検証手順は以下のとおりです": "Below are the steps to verify  <link>the PGP public key of pandanoir</link>.",
+    "<link>pandanoirの公開鍵</link>をダウンロードする": "Download <link>pandanoir's public key</link>",
     "ダウンロードしてきた公開鍵をインポートする": "Import the downloaded public key",
     "以下の署名されたメッセージを検証する": "Verify the signed message below",
     "上記手順を行うbashスクリプトも掲載しておきます。": "The Bash script to perform the above steps is also included below.",

@@ -3,6 +3,7 @@ import { CodeBlock } from './CodeBlock';
 import { ParamsSchema } from '../../parseLangParam';
 import { getDictionary } from '../../_dictionaries';
 import { locales } from '../../_dictionaries/locales';
+import { RichText } from '../../RichText';
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -19,44 +20,35 @@ export default async function VerifyPgpPage({
     <>
       <h2 className="text-4xl">Verify PGP</h2>
       <p>
-        {lang === 'en' ? (
-          <>
-            Below are the steps to verify{' '}
-            <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
-              the PGP public key of pandanoir
-            </ExternalLink>
-            .
-          </>
-        ) : lang === 'ja' ? (
-          <>
-            <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
-              pandanoirのPGP公開鍵
-            </ExternalLink>{' '}
-            の検証手順は以下のとおりです
-          </>
-        ) : (
-          (lang satisfies never)
-        )}
+        <RichText
+          componentMap={{
+            link: (children) => (
+              <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
+                {children}
+              </ExternalLink>
+            ),
+          }}
+        >
+          {
+            dict[
+              '<link>pandanoirのPGP公開鍵</link> の検証手順は以下のとおりです'
+            ]
+          }
+        </RichText>
       </p>
       <ol className="list-decimal list-inside">
         <li>
-          {lang === 'en' ? (
-            <>
-              Download{' '}
-              <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
-                pandanoir&apos;s public key
-              </ExternalLink>
-            </>
-          ) : lang === 'ja' ? (
-            <>
-              <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
-                pandanoirの公開鍵
-              </ExternalLink>
-              をダウンロードする
-            </>
-          ) : (
-            (lang satisfies never)
-          )}
+          <RichText
+            componentMap={{
+              link: (children) => (
+                <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
+                  {children}
+                </ExternalLink>
+              ),
+            }}
+          >
+            {dict['<link>pandanoirの公開鍵</link>をダウンロードする']}
+          </RichText>
         </li>
         <li>
           {dict['ダウンロードしてきた公開鍵をインポートする']}{' '}

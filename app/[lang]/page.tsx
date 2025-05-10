@@ -20,6 +20,7 @@ import { getDictionary } from './_dictionaries';
 import { ParamsSchema } from './parseLangParam';
 import { notFound } from 'next/navigation';
 import { locales } from './_dictionaries/locales';
+import { RichText } from './RichText';
 import { promises as fs } from 'fs';
 import dynamic from 'next/dynamic';
 const RecentPosts = dynamic(
@@ -287,24 +288,17 @@ export default async function Home({
           </ExternalLink>
           <p>
             307B E088 C56B 9F0D (
-            {lang === 'en' ? (
-              <>
-                The public key is available at{' '}
-                <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
-                  keys.openpgp.org
-                </ExternalLink>
-                .
-              </>
-            ) : lang === 'ja' ? (
-              <>
-                <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
-                  keys.openpgp.org
-                </ExternalLink>
-                から公開鍵を取得できます
-              </>
-            ) : (
-              (lang satisfies never)
-            )}
+            <RichText
+              componentMap={{
+                link: (children) => (
+                  <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
+                    {children}
+                  </ExternalLink>
+                ),
+              }}
+            >
+              {dict['<link>keys.openpgp.org</link>から公開鍵を取得できます']}
+            </RichText>
             )
             <br />
             {dict['署名を確認する']}
