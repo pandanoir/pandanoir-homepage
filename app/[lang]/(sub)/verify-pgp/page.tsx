@@ -1,7 +1,7 @@
 import { ExternalLink } from '../../../_components/ExternalLink';
 import { CodeBlock } from './CodeBlock';
 import { ParamsSchema } from '../../parseLangParam';
-import { getDictionary } from '../../_dictionaries';
+import { getDictionary } from '../../_dictionaries/getDictionary';
 import { locales } from '../../_dictionaries/locales';
 import { RichText } from '../../RichText';
 
@@ -31,7 +31,7 @@ export default async function VerifyPgpPage({
         >
           {
             dict[
-              '<link>pandanoirのPGP公開鍵</link> の検証手順は以下のとおりです'
+            '<link>pandanoirのPGP公開鍵</link> の検証手順は以下のとおりです'
             ]
           }
         </RichText>

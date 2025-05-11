@@ -16,7 +16,7 @@ import {
 } from '../_components/ui/tooltip';
 import { QrCodeImage } from '../_components/QrCodeImage';
 import { ExternalLink } from '../_components/ExternalLink';
-import { getDictionary } from './_dictionaries';
+import { getDictionary } from './_dictionaries/getDictionary';
 import { ParamsSchema } from './parseLangParam';
 import { notFound } from 'next/navigation';
 import { locales } from './_dictionaries/locales';
@@ -100,7 +100,7 @@ export function generateStaticParams() {
 export default async function Home({
   params,
 }: {
-  params: Promise<Record<string, unknown>>;
+  params: Promise<{ lang: string }>;
 }) {
   let lang;
   try {
