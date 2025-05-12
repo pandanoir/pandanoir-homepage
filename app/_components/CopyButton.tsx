@@ -1,5 +1,7 @@
 'use client';
 
+import clsx from 'clsx';
+import { ComponentProps } from 'react';
 import { FaRegCopy } from 'react-icons/fa6';
 import { toast } from 'sonner';
 
@@ -34,20 +36,20 @@ function copyToClipboard(text: string): Promise<void> {
   }
 }
 
-export const CodeBlock = (props: { children: string }) => (
-  <div className="bg-gray-300 w-min max-w-full text-gray-900 px-4 py-2 rounded-sm relative group">
-    <pre className="overflow-x-auto">
-      <code>{props.children}</code>
-    </pre>
-    <button
-      type="button"
-      className="group-hover:block hidden absolute top-1.5 right-1.5 border border-black rounded p-1.5 cursor-pointer"
-      onClick={async () => {
-        await copyToClipboard(props.children);
-        toast('クリップボードにコピーされました');
-      }}
-    >
-      <FaRegCopy size="1.4rem" />
-    </button>
-  </div>
+export const CopyButton = ({
+  text,
+  className,
+  ...props
+}: ComponentProps<'button'> & { text: string }) => (
+  <button
+    type="button"
+    className={clsx(className)}
+    onClick={async () => {
+      await copyToClipboard(text);
+      toast('クリップボードにコピーされました');
+    }}
+    {...props}
+  >
+    <FaRegCopy size="1.4rem" />
+  </button>
 );

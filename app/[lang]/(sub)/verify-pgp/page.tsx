@@ -1,9 +1,21 @@
 import { ExternalLink } from '../../../_components/ExternalLink';
-import { CodeBlock } from './CodeBlock';
 import { ParamsSchema } from '../../parseLangParam';
 import { getDictionary } from '../../_dictionaries/getDictionary';
 import { locales } from '../../_dictionaries/locales';
 import { RichText } from '../../RichText';
+import { CopyButton } from '@/app/_components/CopyButton';
+
+const CodeBlock = (props: { children: string }) => (
+  <div className="bg-gray-300 w-min max-w-full text-gray-900 px-4 py-2 rounded-sm relative group">
+    <pre className="overflow-x-auto">
+      <code>{props.children}</code>
+    </pre>
+    <CopyButton
+      className="group-hover:block hidden absolute top-1.5 right-1.5 border border-black rounded p-1.5 cursor-pointer"
+      text={props.children}
+    />
+  </div>
+);
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
