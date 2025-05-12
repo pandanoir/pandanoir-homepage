@@ -1,8 +1,8 @@
 'use client';
 
 import clsx from 'clsx';
-import { ComponentProps } from 'react';
-import { FaRegCopy } from 'react-icons/fa6';
+import { ComponentProps, useState } from 'react';
+import { FaCheck, FaRegCopy } from 'react-icons/fa6';
 import { toast } from 'sonner';
 
 function copyToClipboard(text: string): Promise<void> {
@@ -40,16 +40,24 @@ export const CopyButton = ({
   text,
   className,
   ...props
-}: ComponentProps<'button'> & { text: string }) => (
-  <button
-    type="button"
-    className={clsx(className)}
-    onClick={async () => {
-      await copyToClipboard(text);
-      toast('クリップボードにコピーされました');
-    }}
-    {...props}
-  >
-    <FaRegCopy size="1.4rem" />
-  </button>
-);
+}: ComponentProps<'button'> & { text: string }) => {
+  const [isChecked, setIsChecked] = useState(false);
+  return (
+    <button
+      type="button"
+      className={clsx(className)}
+      onClick={async () => {
+        await copyToClipboard(text);
+        toast('クリップボードにコピーされました');
+        setIsChecked(true);
+        setTimeout(() => setIsChecked(false), 3000);
+      }}
+      onMouseLeave={() => {
+        setIsChecked(false);
+      }}
+      {...props}
+    >
+      {isChecked ? <FaCheck size="1.4rem" /> : <FaRegCopy size="1.4rem" />}
+    </button>
+  );
+};
