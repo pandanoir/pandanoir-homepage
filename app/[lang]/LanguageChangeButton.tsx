@@ -26,9 +26,12 @@ export const LanguageChangeButton = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <div className="border border-gray-700 rounded-full text-gray-300 bg-black p-1">
-          <IoLanguage size="1.8rem" />
-        </div>
+        <button
+          type="button"
+          className="border-2 border-gray-800 rounded-full text-gray-400 bg-black p-1.5 cursor-pointer"
+        >
+          <IoLanguage size="1.6rem" />
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem asChild>
