@@ -80,7 +80,7 @@ export const ArticleList = ({ posts }: { posts: Article[] }) => {
       ))}
       {!hasClickedReadMore && (
         <button
-          className="border border-gray-500 rounded px-4 py-2 bg-gray-800 w-max"
+          className="border border-gray-500 rounded px-4 py-2 bg-gray-800 w-max cursor-pointer"
           onClick={() => setHasClickedReadMore(true)}
         >
           readmore≫
