@@ -45,7 +45,7 @@ export const CopyButton = ({
   return (
     <button
       type="button"
-      className={clsx(className)}
+      className={clsx('cursor-pointer disabled:cursor-default', className)}
       onClick={async () => {
         await copyToClipboard(text);
         toast('クリップボードにコピーされました');
@@ -56,6 +56,7 @@ export const CopyButton = ({
         setIsChecked(false);
       }}
       {...props}
+      disabled={isChecked}
     >
       {isChecked ? <FaCheck size="1.4rem" /> : <FaRegCopy size="1.4rem" />}
     </button>
