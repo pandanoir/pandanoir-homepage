@@ -1,7 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ComponentProps, PropsWithChildren, ReactNode } from 'react';
-import { FaFilm, FaGamepad, FaMusic, FaYoutube } from 'react-icons/fa';
+import {
+  FaFilm,
+  FaGamepad,
+  FaMusic,
+  FaRegCopy,
+  FaYoutube,
+} from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { FiGithub } from 'react-icons/fi';
 import { SiKeybase, SiWantedly, SiZenn } from 'react-icons/si';
@@ -24,6 +30,7 @@ import { RichText } from './RichText';
 import { promises as fs } from 'fs';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '../_components/ui/skeleton';
+import { CopyButton } from '../_components/CopyButton';
 const RecentPosts = dynamic(
   async () => (await import('./RecentPosts')).RecentPosts,
   {
@@ -332,6 +339,16 @@ export default async function Home({
                 </Link>
               </li>
             </ul>
+          </Section>
+          <Section>
+            <Heading>Setup scripts</Heading>
+            dotfiles
+            <div className="max-w-96 flex gap-1">
+              <code className="before:content-['$_'] border border-gray-300 rounded-sm px-1 flex-1">
+                curl -sL dot.pandanoir.net | sh
+              </code>
+              <CopyButton text="curl -sL dot.pandanoir.net | sh" />
+            </div>
           </Section>
         </div>
       </div>
