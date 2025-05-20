@@ -45,7 +45,7 @@ const RecentPosts = dynamic(
 );
 
 const Section = ({ children }: PropsWithChildren) => (
-  <div className="flex flex-col bg-slate-700/40 px-3 pt-3 pb-6 w-full h-max">
+  <div className="flex flex-col bg-slate-800/90 px-3 pt-3 pb-6 w-full h-max">
     {children}
   </div>
 );
@@ -82,7 +82,7 @@ const IconLink = ({
         <a
           href={href}
           rel="noopener noreferrer"
-          className="hover:underline w-min flex items-center gap-1 p-1.5 bg-slate-900 border-2 border-slate-800 rounded-md"
+          className="hover:underline w-min flex items-center gap-1 p-1.5 bg-slate-800 border-2 border-slate-700 rounded-md"
         >
           {icon}
           <span className="sr-only">{name}</span>
