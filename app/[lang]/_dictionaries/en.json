@@ -28,6 +28,7 @@
     "上記手順を行うbashスクリプトも掲載しておきます。": "The Bash script to perform the above steps is also included below.",
     "公開鍵を取得して一時鍵リングにインポート": "Download the public key and import it into a temporary keyring",
     "メッセージを検証する": "Verify the message",
-    "一時鍵リングを削除": "Delete the temporary keyring"
+    "一時鍵リングを削除": "Delete the temporary keyring",
+    "<link>keybaseのverify</link>に上記の署名されたメッセージを貼ることで検証することもできます。": "You can also verify it by pasting the signed message above into <link>Keybase's verify tool</link>."
   }
 }

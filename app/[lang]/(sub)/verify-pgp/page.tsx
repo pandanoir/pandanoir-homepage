@@ -4,6 +4,11 @@ import { getDictionary } from '../../_dictionaries/getDictionary';
 import { locales } from '../../_dictionaries/locales';
 import { RichText } from '../../RichText';
 import { CopyButton } from '@/app/_components/CopyButton';
+import {
+  pgpFingerprint,
+  shortPgpFingerprint,
+} from '../../_constants/pgpFingerprint';
+import { promises as fs } from 'fs';
 
 const CodeBlock = (props: { children: string }) => (
   <div className="bg-gray-300 w-min max-w-full text-gray-900 px-4 py-2 rounded-sm relative group">
@@ -27,7 +32,10 @@ export default async function VerifyPgpPage({
   params: Promise<Record<string, unknown>>;
 }) {
   const { lang } = ParamsSchema.parse(await params);
-  const dict = (await getDictionary(lang)).verifyPage;
+  const [dict, signedMessage] = await Promise.all([
+    getDictionary(lang).then((mod) => mod.verifyPage),
+    fs.readFile(`${process.cwd()}/public/signed-message.txt`, 'utf8'),
+  ]);
   return (
     <>
       <h2 className="text-4xl">Verify PGP</h2>
@@ -35,7 +43,9 @@ export default async function VerifyPgpPage({
         <RichText
           componentMap={{
             link: (children) => (
-              <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
+              <ExternalLink
+                href={`https://keys.openpgp.org/search?q=${shortPgpFingerprint}`}
+              >
                 {children}
               </ExternalLink>
             ),
@@ -53,7 +63,9 @@ export default async function VerifyPgpPage({
           <RichText
             componentMap={{
               link: (children) => (
-                <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
+                <ExternalLink
+                  href={`https://keys.openpgp.org/search?q=${shortPgpFingerprint}`}
+                >
                   {children}
                 </ExternalLink>
               ),
@@ -73,21 +85,7 @@ export default async function VerifyPgpPage({
           <code className="bg-gray-500 rounded-xs px-1">
             gpg --verify signed-message.txt
           </code>
-          <CodeBlock>
-            {`
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA512
-
-This is Naoto Ikuno. fingerprint of PGP key is 307BE088C56B9F0D
------BEGIN PGP SIGNATURE-----
-
-iHUEARYKAB0WIQQEYzqFjz831UnPMO4we+CIxWufDQUCaBM9lAAKCRAwe+CIxWuf
-DbD6AP9YlP2i7jL0g2LSx6L0A66d/AJty7WNtBCDtcpdJcZsSwD+JwjhKHlexw13
-DHgX18opTngZCo/gQ6KrLecWm9YlMQs=
-=puxA
------END PGP SIGNATURE-----
-`.trim()}
-          </CodeBlock>
+          <CodeBlock>{signedMessage}</CodeBlock>
         </li>
       </ol>
       <p>{dict['上記手順を行うbashスクリプトも掲載しておきます。']}</p>
@@ -98,7 +96,7 @@ DHgX18opTngZCo/gQ6KrLecWm9YlMQs=
 mkdir -p /tmp/verify-key
 gpg --no-default-keyring \
     --keyring /tmp/verify-key/keyring.gpg \
-    --import <(curl -s https://keys.openpgp.org/vks/v1/by-fingerprint/04633A858F3F37D549CF30EE307BE088C56B9F0D)
+    --import <(curl -s https://keys.openpgp.org/vks/v1/by-fingerprint/${pgpFingerprint})
 
 # ${dict['メッセージを検証する']}
 gpg --no-default-keyring \
@@ -109,6 +107,23 @@ gpg --no-default-keyring \
 rm -rf /tmp/verify-key
 `.trim()}
       </CodeBlock>
+      <p>
+        <RichText
+          componentMap={{
+            link: (children) => (
+              <ExternalLink href="https://keybase.io/verify">
+                {children}
+              </ExternalLink>
+            ),
+          }}
+        >
+          {
+            dict[
+            '<link>keybaseのverify</link>に上記の署名されたメッセージを貼ることで検証することもできます。'
+            ]
+          }
+        </RichText>
+      </p>
     </>
   );
 }

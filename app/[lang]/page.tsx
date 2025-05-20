@@ -25,6 +25,10 @@ import { promises as fs } from 'fs';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '../_components/ui/skeleton';
 import { CopyButton } from '../_components/CopyButton';
+import {
+  pgpFingerprint,
+  shortPgpFingerprint,
+} from './_constants/pgpFingerprint';
 const RecentPosts = dynamic(
   async () => (await import('./RecentPosts')).RecentPosts,
   {
@@ -294,17 +298,23 @@ export default async function Home({
           <Section>
             <Heading>PGP key</Heading>
             <ExternalLink
-              href="https://keys.openpgp.org/search?q=307BE088C56B9F0D"
+              href={`https://keys.openpgp.org/search?q=${shortPgpFingerprint}`}
               className="w-max"
             >
-              <QrCodeImage value="OPENPGP4FPR:04633A858F3F37D549CF30EE307BE088C56B9F0D" />
+              <QrCodeImage value={`OPENPGP4FPR:${pgpFingerprint}`} />
             </ExternalLink>
             <p>
-              307B E088 C56B 9F0D (
+              {
+                // 4文字区切りでスペースを入れる
+                shortPgpFingerprint.match(/.{1,4}/g)?.join(' ') ?? ''
+              }{' '}
+              (
               <RichText
                 componentMap={{
                   link: (children) => (
-                    <ExternalLink href="https://keys.openpgp.org/search?q=307BE088C56B9F0D">
+                    <ExternalLink
+                      href={`https://keys.openpgp.org/search?q=${shortPgpFingerprint}`}
+                    >
                       {children}
                     </ExternalLink>
                   ),
