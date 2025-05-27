@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { ComponentProps, PropsWithChildren, ReactNode } from 'react';
+import { ComponentProps, PropsWithChildren, ReactNode, Suspense } from 'react';
 import { FaFilm, FaGamepad, FaMusic, FaYoutube } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { FiGithub } from 'react-icons/fi';
@@ -22,27 +22,14 @@ import { notFound } from 'next/navigation';
 import { locales } from './_dictionaries/locales';
 import { RichText } from './RichText';
 import { promises as fs } from 'fs';
-import dynamic from 'next/dynamic';
-import { Skeleton } from '../_components/ui/skeleton';
 import { CopyButton } from '../_components/CopyButton';
 import {
   pgpFingerprint,
   shortPgpFingerprint,
 } from './_constants/pgpFingerprint';
-const RecentPosts = dynamic(
-  async () => (await import('./RecentPosts')).RecentPosts,
-  {
-    loading: () => (
-      <div className="flex flex-col gap-3">
-        <Skeleton className="h-4.5 w-72" />
-        <Skeleton className="h-4.5 w-72" />
-        <Skeleton className="h-4.5 w-72" />
-        <Skeleton className="h-4.5 w-72" />
-        <Skeleton className="h-4.5 w-72" />
-      </div>
-    ),
-  },
-);
+import { fetchAllFeed } from '../_utils/fetchAllFeed';
+import { RecentPosts } from './RecentPosts';
+import { Skeleton } from '../_components/ui/skeleton';
 
 const Section = ({ children }: PropsWithChildren) => (
   <div className="flex flex-col bg-slate-800/90 px-3 pt-3 pb-6 w-full h-max">
@@ -113,6 +100,9 @@ export default async function Home({
   } catch {
     notFound();
   }
+  const recentPostsPromise = fetchAllFeed()
+    .then((posts) => posts.slice(0, 5))
+    .catch(() => []);
   const [dict, signedMessage] = await Promise.all([
     getDictionary(lang).then((mod) => mod.home),
     fs.readFile(`${process.cwd()}/public/signed-message.txt`, 'utf8'),
@@ -286,7 +276,19 @@ export default async function Home({
           </Section>
           <Section>
             <Heading>Recent posts</Heading>
-            <RecentPosts />
+            <Suspense
+              fallback={
+                <div className="flex flex-col gap-3">
+                  <Skeleton className="h-4.5 w-72" />
+                  <Skeleton className="h-4.5 w-72" />
+                  <Skeleton className="h-4.5 w-72" />
+                  <Skeleton className="h-4.5 w-72" />
+                  <Skeleton className="h-4.5 w-72" />
+                </div>
+              }
+            >
+              <RecentPosts recentPosts={recentPostsPromise} />
+            </Suspense>
             <br />
             <Link
               href={`/${lang}/posts`}

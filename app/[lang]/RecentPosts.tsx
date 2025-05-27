@@ -1,16 +1,15 @@
+import clsx from 'clsx';
+import { use } from 'react';
+import { FaBuilding } from 'react-icons/fa6';
+import { FaCalendar } from 'react-icons/fa';
 import { SiZenn } from 'react-icons/si';
 import { HatenaBlogLogo } from '../_components/HatenaBlogLogo';
-import { fetchAllFeed } from '../_utils/fetchAllFeed';
-import { FaBuilding } from 'react-icons/fa6';
-import clsx from 'clsx';
-import { FaCalendar } from 'react-icons/fa';
+import { Post } from '../_utils/fetchAllFeed';
 
-export async function RecentPosts() {
-  await new Promise((r) => setTimeout(r, 500));
-  const recentPosts = (await fetchAllFeed()).slice(0, 5);
+export function RecentPosts({ recentPosts }: { recentPosts: Promise<Post[]> }) {
   return (
     <ul className="grid grid-cols-1 sm:grid-cols-[1fr_max-content] gap-x-2 gap-y-0 sm:gap-y-1">
-      {recentPosts.map((post) => (
+      {use(recentPosts).map((post) => (
         <li key={post.title} className="contents">
           <a
             href={post.link}

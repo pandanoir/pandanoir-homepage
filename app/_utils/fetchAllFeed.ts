@@ -1,6 +1,14 @@
 import { fetchRss2 } from './fetchRss2';
 
-export const fetchAllFeed = async () =>
+export type Post = {
+  source: 'hatena blog' | 'zenn' | 'company';
+  title: string;
+  pubDate: Date;
+  link: string;
+  description: string;
+  image: string;
+};
+export const fetchAllFeed = async (): Promise<Post[]> =>
   (
     await Promise.all([
       fetchRss2('https://www.pandanoir.info/rss?size=100').then((articles) =>
