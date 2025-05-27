@@ -35,12 +35,12 @@ export const LanguageChangeButton = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem asChild>
-          <Link href={`/en${pathnameWithoutLang}`}>
+          <Link href={`/en${pathnameWithoutLang}`} replace>
             English {localeInPathname === 'en' && <FaCheck />}
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href={`/ja${pathnameWithoutLang}`}>
+          <Link href={`/ja${pathnameWithoutLang}`} replace>
             日本語 {(localeInPathname ?? 'ja') === 'ja' && <FaCheck />}
           </Link>
         </DropdownMenuItem>
