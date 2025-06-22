@@ -355,6 +355,14 @@ export default async function Home({
               </code>
               <CopyButton text="curl -sL dot.pandanoir.net | sh" />
             </div>
+            tiny vite template
+            <div className="max-w-96 flex gap-1">
+              <code className="before:content-['$_'] border border-gray-300 rounded-sm px-1 flex-1">
+                npx giget@latest gh:pandanoir/my-vite-react-template my-app
+                --install
+              </code>
+              <CopyButton text="curl -sL dot.pandanoir.net | sh" />
+            </div>
           </Section>
         </div>
       </div>
