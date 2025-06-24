@@ -361,7 +361,7 @@ export default async function Home({
                 npx giget@latest gh:pandanoir/my-vite-react-template my-app
                 --install
               </code>
-              <CopyButton text="curl -sL dot.pandanoir.net | sh" />
+              <CopyButton text="npx giget@latest gh:pandanoir/my-vite-react-template my-app --install" />
             </div>
           </Section>
         </div>
