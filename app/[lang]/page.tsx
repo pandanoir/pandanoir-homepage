@@ -198,10 +198,10 @@ export default async function Home({
                 <SubHeading>
                   <FaGamepad /> Hobbies
                 </SubHeading>
-                <ExternalLinkList className="pl-3">
+                <ul className="pl-3">
                   <li>{dict['映画']}</li>
                   <li>{dict['合気道']}</li>
-                </ExternalLinkList>
+                </ul>
               </div>
               <div>
                 <SubHeading>
@@ -296,6 +296,47 @@ export default async function Home({
             >
               read more
             </Link>
+          </Section>
+          <Section>
+            <Heading>Works</Heading>
+            <ul className="flex flex-col gap-1 pl-3">
+              <li className="flex flex-col md:flex-row gap-2 items-start md:items-end">
+                <ExternalLink href="https://hi-timer.vercel.app">
+                  {dict['Hi-Timer']}
+                </ExternalLink>
+                <span className="text-sm">
+                  {dict['ルービックキューブ競技で使えるスタックタイマー']}
+                </span>
+              </li>
+              <li className="flex flex-col md:flex-row gap-2 items-start md:items-end">
+                <ExternalLink href="https://pandanoir.github.io/anime-emoji-generator/">
+                  {dict['アニメ絵文字ジェネレータ']}
+                </ExternalLink>
+                <span className="text-sm">
+                  {dict['紙芝居式のslackアニメーション絵文字を作るツール']}
+                </span>
+              </li>
+              <li className="flex flex-col md:flex-row gap-2 items-start md:items-end">
+                <ExternalLink href="https://github.com/pandanoir/branchify">
+                  {dict['branchify']}
+                </ExternalLink>
+                <span className="text-sm">
+                  {
+                    dict[
+                    'ファイルパスのリストをディレクトリツリーに変換するCLIツール'
+                    ]
+                  }
+                </span>
+              </li>
+              <li className="flex flex-col md:flex-row gap-2 items-start md:items-end">
+                <ExternalLink href="https://www.pandanoir.info/entry/2024/09/04/231051">
+                  {dict['電子ペーパー卓上カレンダー']}
+                </ExternalLink>
+                <span className="text-sm">
+                  {dict['Googleカレンダーを表示する電子ペーパー卓上カレンダー']}
+                </span>
+              </li>
+            </ul>
           </Section>
           <Section>
             <Heading>PGP key</Heading>

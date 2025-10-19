@@ -18,7 +18,15 @@
     "keybase": "using Keybase",
     "泉まくら": "Izumi Makura",
     "相対性理論": "Soutaiseiriron",
-    "空音": "SORANE"
+    "空音": "SORANE",
+    "Hi-Timer": "Hi-Timer",
+    "ルービックキューブ競技で使えるスタックタイマー": "A stack timer designed for use in Rubik’s Cube competitions",
+    "アニメ絵文字ジェネレータ": "Anime Emoji Generator",
+    "紙芝居式のslackアニメーション絵文字を作るツール": "A tool that creates slideshow-style animated emojis for Slack",
+    "branchify": "branchify",
+    "ファイルパスのリストをディレクトリツリーに変換するCLIツール": "A CLI tool that converts a list of file paths into a directory tree structure",
+    "電子ペーパー卓上カレンダー": "E-Paper Desktop Calendar",
+    "Googleカレンダーを表示する電子ペーパー卓上カレンダー": "An electronic paper desktop calendar that displays events from Google Calendar"
   },
   "verifyPage": {
     "<link>pandanoirのPGP公開鍵</link> の検証手順は以下のとおりです": "Below are the steps to verify  <link>the PGP public key of pandanoir</link>.",
