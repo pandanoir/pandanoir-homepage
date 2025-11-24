@@ -266,15 +266,6 @@ export default async function Home({
             </div>
           </Section>
           <Section>
-            <Heading>Education</Heading>
-            <ul className="pl-3">
-              <li>
-                2016-2020 {dict['東北大学 電気情報物理工学科 情報学科コース']}
-              </li>
-              <li>2013-2016 {dict['新潟高校 普通科']}</li>
-            </ul>
-          </Section>
-          <Section>
             <Heading>Recent posts</Heading>
             <Suspense
               fallback={
@@ -336,6 +327,15 @@ export default async function Home({
                   {dict['Googleカレンダーを表示する電子ペーパー卓上カレンダー']}
                 </span>
               </li>
+            </ul>
+          </Section>
+          <Section>
+            <Heading>Education</Heading>
+            <ul className="pl-3">
+              <li>
+                2016-2020 {dict['東北大学 電気情報物理工学科 情報学科コース']}
+              </li>
+              <li>2013-2016 {dict['新潟高校 普通科']}</li>
             </ul>
           </Section>
           <Section>
