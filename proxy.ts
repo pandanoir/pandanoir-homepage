@@ -4,7 +4,7 @@ const locales = ['en', 'ja'] as const;
 const secondsPerYear = 60 * 60 * 24 * 365;
 
 // ロケール関連の処理をしている(リダイレクトする、cookieにロケールをセットする)
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname, origin } = request.nextUrl;
   const localeInPathname = locales.find(
     (locale) =>
