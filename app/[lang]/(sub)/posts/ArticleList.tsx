@@ -22,8 +22,16 @@ export const ArticleList = ({ posts }: { posts: Article[] }) => {
 
   return (
     <>
-      {postsByYear.map(([year, posts], i) => (
-        <>
+      {postsByYear.map(([year, posts]) => (
+        <section key={year}>
+          <div
+            className="sticky top-0 z-10 bg-black/70 py-2
+              max-w-256 flex place-items-center gap-2
+              after:flex-1 after:border-t after:border-gray-300
+              before:flex-1 before:border-t before:border-gray-300"
+          >
+            <div>{year}年</div>
+          </div>
           <ul className="flex flex-col gap-y-2 justify-center">
             {posts.map((x) => (
               <li key={x.link}>
@@ -67,16 +75,7 @@ export const ArticleList = ({ posts }: { posts: Article[] }) => {
               </li>
             ))}
           </ul>
-          {i !== Object.keys(postsByYear).length - 1 && (
-            <div
-              className="max-w-256 flex place-items-center gap-2
-                after:flex-1 after:border-t after:border-gray-300
-                before:flex-1 before:border-t before:border-gray-300"
-            >
-              <div>{year}年</div>
-            </div>
-          )}
-        </>
+        </section>
       ))}
       {!hasClickedReadMore && (
         <button
