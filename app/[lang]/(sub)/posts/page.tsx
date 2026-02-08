@@ -1,4 +1,4 @@
-import { fetchAllFeed } from '../../../_utils/fetchAllFeed';
+import { fetchRecentFeed } from '../../../_utils/fetchAllFeed';
 import { locales } from '../../_dictionaries/locales';
 import { ArticleList } from './ArticleList';
 
@@ -9,7 +9,7 @@ export default async function PostPage() {
   return (
     <>
       <h2 className="text-4xl">Recent posts</h2>
-      <ArticleList posts={await fetchAllFeed()} />
+      <ArticleList initialPosts={await fetchRecentFeed(50)} />
     </>
   );
 }

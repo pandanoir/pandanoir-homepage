@@ -1,9 +1,16 @@
 'use client';
 import { HatenaBlogLogo } from '@/app/_components/HatenaBlogLogo';
 import clsx from 'clsx';
-import { useState } from 'react';
+import {
+  startTransition,
+  useActionState,
+  useEffect,
+  useEffectEvent,
+  useRef,
+} from 'react';
 import { FaBuilding } from 'react-icons/fa6';
 import { SiZenn } from 'react-icons/si';
+import { fetchRemainingPosts } from './actions';
 
 type Article = {
   source: 'hatena blog' | 'zenn' | 'company';
@@ -13,11 +20,43 @@ type Article = {
   description: string;
   image: string;
 };
-export const ArticleList = ({ posts }: { posts: Article[] }) => {
-  const [hasClickedReadMore, setHasClickedReadMore] = useState(false);
-  const slicedPosts = hasClickedReadMore ? posts : posts.slice(0, 23);
+export const ArticleList = ({ initialPosts }: { initialPosts: Article[] }) => {
+  const [remainingPosts, loadMore, isPending] = useActionState(
+    async (prev: Article[] | null) =>
+      prev ??
+      (await fetchRemainingPosts(initialPosts.length)).map((post) => ({
+        ...post,
+        pubDate: new Date(post.pubDate),
+      })),
+    null,
+  );
+
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  const onLoadMore = useEffectEvent(() => {
+    if (isPending) return;
+    startTransition(() => {
+      loadMore();
+    });
+  });
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          onLoadMore();
+        }
+      },
+      { rootMargin: '200px' },
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, []);
+
   const postsByYear = [
-    ...Map.groupBy(slicedPosts, (post) => post.pubDate.getFullYear()).entries(),
+    ...Map.groupBy([...initialPosts, ...(remainingPosts ?? [])], (post) =>
+      post.pubDate.getFullYear(),
+    ).entries(),
   ].sort((a, b) => Number(b[0]) - Number(a[0]));
 
   return (
@@ -77,14 +116,7 @@ export const ArticleList = ({ posts }: { posts: Article[] }) => {
           </ul>
         </section>
       ))}
-      {!hasClickedReadMore && (
-        <button
-          className="border border-gray-500 rounded px-4 py-2 bg-gray-800 w-max cursor-pointer"
-          onClick={() => setHasClickedReadMore(true)}
-        >
-          readmore≫
-        </button>
-      )}
+      {remainingPosts == null && <div ref={sentinelRef} className="h-1" />}
     </>
   );
 };

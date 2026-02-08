@@ -14,6 +14,9 @@ export type Post = {
 /** URLからentryパス部分を抽出（例: /entry/2026/01/19/220608） */
 const extractEntryPath = (url: string) => url.match(/\/entry\/.+/)?.[0] ?? '';
 
+export const fetchRecentFeed = async (limit: number) =>
+  (await fetchAllFeed()).slice(0, limit);
+
 export const fetchAllFeed = async (): Promise<Post[]> => {
   const [hatenaPosts, zennPosts] = await Promise.all([
     fetchRss2('https://www.pandanoir.info/rss?size=100').then((articles) =>
