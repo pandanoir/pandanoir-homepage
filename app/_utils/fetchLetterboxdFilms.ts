@@ -47,9 +47,7 @@ export async function fetchJapaneseTitle(
   }
 }
 
-export async function fetchLetterboxdFilms(
-  lang: 'ja' | 'en',
-): Promise<Film[]> {
+export async function fetchLetterboxdFilms(lang: 'ja' | 'en'): Promise<Film[]> {
   const rssText = await fetch(LETTERBOXD_RSS_URL, {
     next: { revalidate: 86400 },
   }).then((res) => res.text());
@@ -61,27 +59,35 @@ export async function fetchLetterboxdFilms(
       .filter((item) => !isListItem(item))
       .map(async (itemXml) => {
         const filmTitle =
-          itemXml.match(/<letterboxd:filmTitle>(.*?)<\/letterboxd:filmTitle>/)?.[1] ?? '';
+          itemXml.match(
+            /<letterboxd:filmTitle>(.*?)<\/letterboxd:filmTitle>/,
+          )?.[1] ?? '';
         const year = parseInt(
-          itemXml.match(/<letterboxd:filmYear>(\d+)<\/letterboxd:filmYear>/)?.[1] ?? '0',
+          itemXml.match(
+            /<letterboxd:filmYear>(\d+)<\/letterboxd:filmYear>/,
+          )?.[1] ?? '0',
           10,
         );
         const ratingStr = itemXml.match(
           /<letterboxd:memberRating>([\d.]+)<\/letterboxd:memberRating>/,
         )?.[1];
         const watchedDate =
-          itemXml.match(/<letterboxd:watchedDate>(.*?)<\/letterboxd:watchedDate>/)?.[1] ?? '';
+          itemXml.match(
+            /<letterboxd:watchedDate>(.*?)<\/letterboxd:watchedDate>/,
+          )?.[1] ?? '';
         const rawUrl = itemXml.match(/<link>(.*?)<\/link>/s)?.[1] ?? '';
-        // https://letterboxd.com/{user}/film/xxx/ → https://letterboxd.com/film/xxx/
+        // https://letterboxd.com/{user}/film/xxx/{n}/ → https://letterboxd.com/film/xxx/
         const letterboxdUrl = rawUrl.replace(
-          /letterboxd\.com\/[^/]+\/film\//,
-          'letterboxd.com/film/',
+          /letterboxd\.com\/[^/]+\/film\/([^/]+\/)(\d+\/?)?$/,
+          'letterboxd.com/film/$1',
         );
         const posterUrl = extractPosterUrl(itemXml);
 
         let title = filmTitle;
         if (lang === 'ja') {
-          const tmdbId = itemXml.match(/<tmdb:movieId>(\d+)<\/tmdb:movieId>/)?.[1];
+          const tmdbId = itemXml.match(
+            /<tmdb:movieId>(\d+)<\/tmdb:movieId>/,
+          )?.[1];
           if (tmdbId) {
             const jaTitle = await fetchJapaneseTitle(tmdbId);
             if (jaTitle) title = jaTitle;
