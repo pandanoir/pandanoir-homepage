@@ -199,7 +199,15 @@ export default async function Home({
                   <FaGamepad /> Hobbies
                 </SubHeading>
                 <ul className="pl-3">
-                  <li>{dict['映画']}</li>
+                  <li>
+                    {dict['映画']}{' '}
+                    <Link
+                      href={`/${lang}/films`}
+                      className="hover:underline hover:text-sky-300 text-sky-500 text-sm"
+                    >
+                      {dict['視聴履歴']}
+                    </Link>
+                  </li>
                   <li>{dict['合気道']}</li>
                 </ul>
               </div>
