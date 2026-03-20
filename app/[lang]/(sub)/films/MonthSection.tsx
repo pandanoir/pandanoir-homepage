@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import '../../../../lib/mapPolyfill';
 import { type Film } from '../../../_utils/fetchLetterboxdFilms';
 
 function ratingToStars(rating: number): string {
@@ -34,7 +35,9 @@ function FilmCard({ film }: { film: Film }) {
           </span>
         </div>
       )}
-      <span className="text-xs text-slate-400 leading-none">{month}/{day}</span>
+      <span className="text-xs text-slate-400 leading-none">
+        {month}/{day}
+      </span>
       <span className="text-xs leading-tight line-clamp-2">{film.title}</span>
       {film.rating !== null && (
         <span className="text-xs text-yellow-400 leading-none">
@@ -60,7 +63,7 @@ function CalendarGrid({
   const daysInMonth = new Date(year, monthNum, 0).getDate();
 
   const cells: (number | null)[] = [
-    ...Array<null>(firstDayOfWeek).fill(null),
+    ...Array(firstDayOfWeek).fill(null),
     ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
   ];
 
@@ -102,7 +105,10 @@ function CalendarGrid({
               {isHovered && films && (
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-10 pointer-events-none flex gap-2 bg-slate-900/95 border border-slate-600 rounded p-2 shadow-xl">
                   {films.toReversed().map((film) => (
-                    <div key={film.letterboxdUrl} className="flex flex-col gap-1 w-24 flex-shrink-0">
+                    <div
+                      key={film.letterboxdUrl}
+                      className="flex flex-col gap-1 w-24 flex-shrink-0"
+                    >
                       {film.posterUrl ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
@@ -119,7 +125,9 @@ function CalendarGrid({
                           </span>
                         </div>
                       )}
-                      <span className="text-xs leading-tight line-clamp-2">{film.title}</span>
+                      <span className="text-xs leading-tight line-clamp-2">
+                        {film.title}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -163,9 +171,7 @@ export function MonthSection({
 }) {
   const filmsByDate = new Map<string, Film[]>();
   for (const film of films) {
-    const group = filmsByDate.get(film.watchedDate);
-    if (group) group.push(film);
-    else filmsByDate.set(film.watchedDate, [film]);
+    filmsByDate.getOrInsert(film.watchedDate, []).push(film);
   }
 
   return (

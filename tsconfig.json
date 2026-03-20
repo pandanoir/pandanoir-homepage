@@ -4,7 +4,7 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "es2020",
+      "es2023",
       "es2024.collection"
     ],
     "allowJs": true,
