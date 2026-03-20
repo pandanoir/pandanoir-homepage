@@ -25,7 +25,7 @@ export const LanguageChangeButton = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
         <button
           type="button"
           className="border-2 border-gray-800 rounded-full text-gray-400 bg-black p-1.5 cursor-pointer"
