@@ -47,6 +47,6 @@ export const config = {
      * [lang]ルーティングに入れたくないので除外している
      * publicに入ってるものも、拡張子が入ってる=publicとみなして除外している
      */
-    '/((?!_next|api|static|favicon\\.ico|prettierrc\\.sh|.*\\.(?:ico|png|jpe?g|svg|webp|css|js|txt|json)$).*)',
+    '/((?!_next|api|static|favicon\\.ico|prettierrc\\.sh|.*\\.(?:ico|png|jpe?g|svg|webp|css|js|txt|json|ical)$).*)',
   ],
 };
