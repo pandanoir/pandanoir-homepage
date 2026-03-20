@@ -36,7 +36,9 @@ function FilmCard({ film }: { film: Film }) {
       </span>
       <span className="text-xs leading-tight line-clamp-2">{film.title}</span>
       {film.rating !== null && (
-        <span className="text-xs text-yellow-400 leading-none">
+        <span
+          className={`text-xs leading-none ${film.rating >= 4.5 ? 'text-orange-500' : 'text-yellow-400'}`}
+        >
           {ratingToStars(film.rating)}
         </span>
       )}
@@ -158,7 +160,9 @@ export function MonthSection({
 
   return (
     <section>
-      <h3 className="text-xl font-bold mb-3">{month.replace('-', '/')}</h3>
+      <h3 className="text-xl font-bold mb-3">
+        {month.replace('-', '/')} ({films.length})
+      </h3>
       <div className="flex gap-8 items-start">
         <div className="flex flex-wrap gap-4 flex-1 min-w-0">
           {films.map((film) => (
