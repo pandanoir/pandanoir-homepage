@@ -9,7 +9,11 @@ function toStars(rating: number): string {
 }
 
 function escapeIcal(str: string): string {
-  return str.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+  return str
+    .replace(/\\/g, '\\\\')
+    .replace(/;/g, '\\;')
+    .replace(/,/g, '\\,')
+    .replace(/\n/g, '\\n');
 }
 
 function toIcalDate(dateStr: string): string {
@@ -21,11 +25,16 @@ export async function GET() {
 
   const events = films
     .map((film) => {
-      const ratingStr = film.rating !== null ? ` - ${toStars(film.rating)}` : '';
+      const ratingStr =
+        film.rating !== null ? ` - ${toStars(film.rating)}` : '';
       const summary = escapeIcal(`${film.title}, ${film.year}${ratingStr}`);
       const dtstart = toIcalDate(film.watchedDate);
       const dtend = dtstart;
-      const uid = escapeIcal(film.letterboxdUrl);
+      const uid = escapeIcal(
+        film.rewatchCount
+          ? `${film.letterboxdUrl}${film.rewatchCount}/`
+          : film.letterboxdUrl,
+      );
 
       return [
         'BEGIN:VEVENT',

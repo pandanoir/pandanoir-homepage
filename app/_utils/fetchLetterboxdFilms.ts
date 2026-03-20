@@ -8,6 +8,7 @@ export type Film = {
   watchedDate: string; // YYYY-MM-DD
   posterUrl: string | null;
   letterboxdUrl: string;
+  rewatchCount: number | null; // 何回目の視聴か (/n/ に相当、初回はnull)
 };
 
 export function isListItem(itemXml: string): boolean {
@@ -62,11 +63,10 @@ export async function fetchLetterboxdFilms(lang: 'ja' | 'en'): Promise<Film[]> {
           itemXml.match(
             /<letterboxd:filmTitle>(.*?)<\/letterboxd:filmTitle>/,
           )?.[1] ?? '';
-        const year = parseInt(
+        const year = Number(
           itemXml.match(
             /<letterboxd:filmYear>(\d+)<\/letterboxd:filmYear>/,
           )?.[1] ?? '0',
-          10,
         );
         const ratingStr = itemXml.match(
           /<letterboxd:memberRating>([\d.]+)<\/letterboxd:memberRating>/,
@@ -81,6 +81,8 @@ export async function fetchLetterboxdFilms(lang: 'ja' | 'en'): Promise<Film[]> {
           /letterboxd\.com\/[^/]+\/film\/([^/]+\/)(\d+\/?)?$/,
           'letterboxd.com/film/$1',
         );
+        const rewatchCount =
+          Number(rawUrl.match(/\/film\/[^/]+\/(\d+)\/?$/)?.[1] ?? '') || null;
         const posterUrl = extractPosterUrl(itemXml);
 
         let title = filmTitle;
@@ -101,6 +103,7 @@ export async function fetchLetterboxdFilms(lang: 'ja' | 'en'): Promise<Film[]> {
           watchedDate,
           posterUrl,
           letterboxdUrl,
+          rewatchCount,
         } satisfies Film;
       }),
   );
