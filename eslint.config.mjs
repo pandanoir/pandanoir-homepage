@@ -1,4 +1,4 @@
-import coreWebVitals from "eslint-config-next/core-web-vitals";
+import coreWebVitals from 'eslint-config-next/core-web-vitals';
 
 const config = [...coreWebVitals];
 

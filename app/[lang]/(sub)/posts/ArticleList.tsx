@@ -63,21 +63,16 @@ export const ArticleList = ({ initialPosts }: { initialPosts: Article[] }) => {
     <>
       {postsByYear.map(([year, posts]) => (
         <section key={year}>
-          <div
-            className="sticky top-0 z-10 bg-black/70 py-2
-              max-w-256 flex place-items-center gap-2
-              after:flex-1 after:border-t after:border-gray-300
-              before:flex-1 before:border-t before:border-gray-300"
-          >
+          <div className="sticky top-0 z-10 flex max-w-256 place-items-center gap-2 bg-black/70 py-2 before:flex-1 before:border-t before:border-gray-300 after:flex-1 after:border-t after:border-gray-300">
             <div>{year}年</div>
           </div>
-          <ul className="flex flex-col gap-y-2 justify-center">
+          <ul className="flex flex-col justify-center gap-y-2">
             {posts.map((x) => (
               <li key={x.link}>
                 <a
                   href={x.link}
                   className={clsx(
-                    'flex flex-col px-2 py-1 max-w-256 rounded shadow-sm overflow-hidden group',
+                    'group flex max-w-256 flex-col overflow-hidden rounded px-2 py-1 shadow-sm',
                     {
                       zenn: 'bg-[#3EA8FF] text-gray-900',
                       'hatena blog': 'bg-gray-300 text-gray-800',
@@ -91,8 +86,8 @@ export const ArticleList = ({ initialPosts }: { initialPosts: Article[] }) => {
                     suppressHydrationWarning={true}
                     className="font-bold group-hover:underline"
                   >
-                    <span className="pl-4 mr-1 relative">
-                      <span className="absolute left-0 top-1/2 -mt-2">
+                    <span className="relative mr-1 pl-4">
+                      <span className="absolute top-1/2 left-0 -mt-2">
                         {
                           {
                             'hatena blog': <HatenaBlogLogo width="1rem" />,

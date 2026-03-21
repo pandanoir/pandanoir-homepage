@@ -32,17 +32,17 @@ import { RecentPosts } from './RecentPosts';
 import { Skeleton } from '../_components/ui/skeleton';
 
 const Section = ({ children }: PropsWithChildren) => (
-  <div className="flex flex-col bg-slate-800/90 px-3 pt-3 pb-6 w-full h-max">
+  <div className="flex h-max w-full flex-col bg-slate-800/90 px-3 pt-3 pb-6">
     {children}
   </div>
 );
 const Heading = ({ children }: PropsWithChildren) => (
-  <h2 className="text-4xl font-bold border-b-2 border-gray-600 mb-3">
+  <h2 className="mb-3 border-b-2 border-gray-600 text-4xl font-bold">
     {children}
   </h2>
 );
 const SubHeading = ({ children }: PropsWithChildren) => (
-  <h3 className="text-lg flex items-center gap-1">{children}</h3>
+  <h3 className="flex items-center gap-1 text-lg">{children}</h3>
 );
 
 const ExternalLinkList = (props: ComponentProps<'ul'>) => <ul {...props} />;
@@ -69,7 +69,7 @@ const IconLink = ({
         <a
           href={href}
           rel="noopener noreferrer"
-          className="hover:underline w-min flex items-center gap-1 p-1.5 bg-slate-800 border-2 border-slate-700 rounded-md"
+          className="flex w-min items-center gap-1 rounded-md border-2 border-slate-700 bg-slate-800 p-1.5 hover:underline"
         >
           {icon}
           <span className="sr-only">{name}</span>
@@ -109,31 +109,24 @@ export default async function Home({
   ]);
 
   return (
-    <div className="text-slate-300 w-full max-w-[1680px] place-self-center px-2">
-      <div className="flex lg:flex-row flex-col gap-3">
-        <div className="flex-2 max-h-screen flex items-center">
-          <div
-            className="grid justify-center max-h-screen h-max gap-y-3 gap-x-2 p-3 pt-6 sm:pt-3
-            sm:[grid-template-areas:'icon_name''icon_description''links_links']
-            sm:grid-cols-[max-content_1fr]
-            [grid-template-areas:'name''description''links']
-            grid-rows-[repeat(3,min-content)]
-            grid-cols-1"
-          >
+    <div className="w-full max-w-[1680px] place-self-center px-2 text-slate-300">
+      <div className="flex flex-col gap-3 lg:flex-row">
+        <div className="flex max-h-screen flex-2 items-center">
+          <div className="grid h-max max-h-screen grid-cols-1 grid-rows-[repeat(3,min-content)] justify-center gap-x-2 gap-y-3 p-3 pt-6 [grid-template-areas:'name''description''links'] sm:grid-cols-[max-content_1fr] sm:pt-3 sm:[grid-template-areas:'icon_name''icon_description''links_links']">
             <Image
               src="/logo-black.png"
               width="300"
               height="300"
               alt=""
-              className="sm:block hidden w-36 h-36 rounded-full [grid-area:icon]"
+              className="hidden h-36 w-36 rounded-full [grid-area:icon] sm:block"
             />
-            <h1 className="text-6xl font-bold self-end [grid-area:name]">
+            <h1 className="self-end text-6xl font-bold [grid-area:name]">
               pandanoir
             </h1>
             <p className="[grid-area:description]">
               {
                 dict[
-                'ウェブフロントエンドエンジニア。ReactとTypeScriptに造詣が深い。'
+                  'ウェブフロントエンドエンジニア。ReactとTypeScriptに造詣が深い。'
                 ]
               }
             </p>
@@ -190,7 +183,7 @@ export default async function Home({
             </ul>
           </div>
         </div>
-        <div className="flex-3 flex flex-col gap-4">
+        <div className="flex flex-3 flex-col gap-4">
           <Section>
             <Heading>Profile</Heading>
             <div className="flex flex-col gap-3">
@@ -203,7 +196,7 @@ export default async function Home({
                     {dict['映画']}{' '}
                     <Link
                       href={`/${lang}/films`}
-                      className="hover:underline hover:text-sky-300 text-sky-500 text-sm"
+                      className="text-sm text-sky-500 hover:text-sky-300 hover:underline"
                     >
                       {dict['視聴履歴']}
                     </Link>
@@ -291,7 +284,7 @@ export default async function Home({
             <br />
             <Link
               href={`/${lang}/posts`}
-              className="hover:underline hover:text-sky-300 text-sky-500"
+              className="text-sky-500 hover:text-sky-300 hover:underline"
             >
               read more
             </Link>
@@ -299,7 +292,7 @@ export default async function Home({
           <Section>
             <Heading>Works</Heading>
             <ul className="flex flex-col gap-1 pl-3">
-              <li className="flex flex-col md:flex-row gap-2 items-start md:items-end">
+              <li className="flex flex-col items-start gap-2 md:flex-row md:items-end">
                 <ExternalLink href="https://hi-timer.vercel.app">
                   {dict['Hi-Timer']}
                 </ExternalLink>
@@ -307,7 +300,7 @@ export default async function Home({
                   {dict['ルービックキューブ競技で使えるスタックタイマー']}
                 </span>
               </li>
-              <li className="flex flex-col md:flex-row gap-2 items-start md:items-end">
+              <li className="flex flex-col items-start gap-2 md:flex-row md:items-end">
                 <ExternalLink href="https://pandanoir.github.io/anime-emoji-generator/">
                   {dict['アニメ絵文字ジェネレータ']}
                 </ExternalLink>
@@ -315,19 +308,19 @@ export default async function Home({
                   {dict['紙芝居式のslackアニメーション絵文字を作るツール']}
                 </span>
               </li>
-              <li className="flex flex-col md:flex-row gap-2 items-start md:items-end">
+              <li className="flex flex-col items-start gap-2 md:flex-row md:items-end">
                 <ExternalLink href="https://github.com/pandanoir/branchify">
                   {dict['branchify']}
                 </ExternalLink>
                 <span className="text-sm">
                   {
                     dict[
-                    'ファイルパスのリストをディレクトリツリーに変換するCLIツール'
+                      'ファイルパスのリストをディレクトリツリーに変換するCLIツール'
                     ]
                   }
                 </span>
               </li>
-              <li className="flex flex-col md:flex-row gap-2 items-start md:items-end">
+              <li className="flex flex-col items-start gap-2 md:flex-row md:items-end">
                 <ExternalLink href="https://www.pandanoir.info/entry/2024/09/04/231051">
                   {dict['電子ペーパー卓上カレンダー']}
                 </ExternalLink>
@@ -377,7 +370,7 @@ export default async function Home({
               <br />
               {dict['署名を確認する']}
             </p>
-            <ul className="list-disc list-inside">
+            <ul className="list-inside list-disc">
               <li>
                 <ExternalLink
                   href={`https://keybase.io/verify?msg=${encodeURIComponent(signedMessage)}`}
@@ -388,7 +381,7 @@ export default async function Home({
               <li>
                 <Link
                   href={`/${lang}/verify-pgp`}
-                  className="hover:underline hover:text-sky-300 text-sky-500"
+                  className="text-sky-500 hover:text-sky-300 hover:underline"
                 >
                   {dict['手動']}
                 </Link>
@@ -398,15 +391,15 @@ export default async function Home({
           <Section>
             <Heading>Setup scripts</Heading>
             dotfiles
-            <div className="max-w-96 flex gap-1">
-              <code className="before:content-['$_'] border border-gray-300 rounded-sm px-1 flex-1">
+            <div className="flex max-w-96 gap-1">
+              <code className="flex-1 rounded-sm border border-gray-300 px-1 before:content-['$_']">
                 curl -sL dot.pandanoir.net | sh
               </code>
               <CopyButton text="curl -sL dot.pandanoir.net | sh" />
             </div>
             tiny vite template
-            <div className="max-w-96 flex gap-1">
-              <code className="before:content-['$_'] border border-gray-300 rounded-sm px-1 flex-1">
+            <div className="flex max-w-96 gap-1">
+              <code className="flex-1 rounded-sm border border-gray-300 px-1 before:content-['$_']">
                 npx giget@latest gh:pandanoir/my-vite-react-template my-app
                 --install
               </code>
@@ -415,7 +408,7 @@ export default async function Home({
           </Section>
         </div>
       </div>
-      <footer className="flex gap-1 justify-center flex-wrap">
+      <footer className="flex flex-wrap justify-center gap-1">
         <span className="whitespace-nowrap">
           GitHub Repository:{' '}
           <ExternalLink href="https://github.com/pandanoir/pandanoir-homepage">

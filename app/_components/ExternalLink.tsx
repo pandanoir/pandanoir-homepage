@@ -7,7 +7,7 @@ export const ExternalLink = (props: ComponentProps<'a'>) => (
     rel="noopener noreferrer"
     className={clsx(
       props.className,
-      'hover:underline hover:text-sky-300 text-sky-500',
+      'text-sky-500 hover:text-sky-300 hover:underline',
     )}
   />
 );

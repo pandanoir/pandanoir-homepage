@@ -11,12 +11,12 @@ import {
 import { promises as fs } from 'fs';
 
 const CodeBlock = (props: { children: string }) => (
-  <div className="bg-gray-300 w-min max-w-full text-gray-900 px-4 py-2 rounded-sm relative group">
+  <div className="group relative w-min max-w-full rounded-sm bg-gray-300 px-4 py-2 text-gray-900">
     <pre className="overflow-x-auto">
       <code>{props.children}</code>
     </pre>
     <CopyButton
-      className="group-hover:block hidden absolute top-1.5 right-1.5 border border-black rounded p-1.5 cursor-pointer"
+      className="absolute top-1.5 right-1.5 hidden cursor-pointer rounded border border-black p-1.5 group-hover:block"
       text={props.children}
     />
   </div>
@@ -53,12 +53,12 @@ export default async function VerifyPgpPage({
         >
           {
             dict[
-            '<link>pandanoirのPGP公開鍵</link> の検証手順は以下のとおりです'
+              '<link>pandanoirのPGP公開鍵</link> の検証手順は以下のとおりです'
             ]
           }
         </RichText>
       </p>
-      <ol className="list-decimal list-inside">
+      <ol className="list-inside list-decimal">
         <li>
           <RichText
             componentMap={{
@@ -76,13 +76,13 @@ export default async function VerifyPgpPage({
         </li>
         <li>
           {dict['ダウンロードしてきた公開鍵をインポートする']}{' '}
-          <code className="bg-gray-500 rounded-xs px-1">
+          <code className="rounded-xs bg-gray-500 px-1">
             gpg --import pandanoir.asc
           </code>
         </li>
         <li>
           {dict['以下の署名されたメッセージを検証する']}{' '}
-          <code className="bg-gray-500 rounded-xs px-1">
+          <code className="rounded-xs bg-gray-500 px-1">
             gpg --verify signed-message.txt
           </code>
           <CodeBlock>{signedMessage}</CodeBlock>
@@ -119,7 +119,7 @@ rm -rf /tmp/verify-key
         >
           {
             dict[
-            '<link>keybaseのverify</link>に上記の署名されたメッセージを貼ることで検証することもできます。'
+              '<link>keybaseのverify</link>に上記の署名されたメッセージを貼ることで検証することもできます。'
             ]
           }
         </RichText>

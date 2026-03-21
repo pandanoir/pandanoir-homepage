@@ -13,7 +13,7 @@ function FilmCard({ film }: { film: Film }) {
       href={film.letterboxdUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex flex-col gap-1 w-24 hover:opacity-75 transition-opacity"
+      className="flex w-24 flex-col gap-1 transition-opacity hover:opacity-75"
     >
       {film.posterUrl ? (
         // eslint-disable-next-line @next/next/no-img-element
@@ -22,19 +22,19 @@ function FilmCard({ film }: { film: Film }) {
           alt={film.title}
           width={96}
           height={144}
-          className="w-24 h-36 object-cover rounded"
+          className="h-36 w-24 rounded object-cover"
         />
       ) : (
-        <div className="w-24 h-36 bg-slate-700 rounded flex items-center justify-center">
-          <span className="text-xs text-slate-400 text-center px-1 leading-tight">
+        <div className="flex h-36 w-24 items-center justify-center rounded bg-slate-700">
+          <span className="px-1 text-center text-xs leading-tight text-slate-400">
             {film.title}
           </span>
         </div>
       )}
-      <span className="text-xs text-slate-400 leading-none">
+      <span className="text-xs leading-none text-slate-400">
         {month}/{day}
       </span>
-      <span className="text-xs leading-tight line-clamp-2">{film.title}</span>
+      <span className="line-clamp-2 text-xs leading-tight">{film.title}</span>
       {film.rating !== null && (
         <span
           className={`text-xs leading-none ${film.rating >= 4.5 ? 'text-orange-500' : 'text-yellow-400'}`}
@@ -68,7 +68,7 @@ function CalendarGrid({
     <div className="w-44">
       <div className="grid grid-cols-7 text-center">
         {WEEKDAYS.map((d) => (
-          <div key={d} className="text-xs text-slate-500 pb-1">
+          <div key={d} className="pb-1 text-xs text-slate-500">
             {d}
           </div>
         ))}
@@ -82,18 +82,18 @@ function CalendarGrid({
           const inner = (
             <>
               <span
-                className={`text-xs w-5 h-5 flex items-center justify-center rounded-full leading-none ${!hasFilm ? 'text-slate-500' : 'group-hover:bg-sky-500 group-hover:text-white'}`}
+                className={`flex h-5 w-5 items-center justify-center rounded-full text-xs leading-none ${!hasFilm ? 'text-slate-500' : 'group-hover:bg-sky-500 group-hover:text-white'}`}
               >
                 {day}
               </span>
               {hasFilm && (
                 <>
-                  <span className="w-1 h-1 rounded-full mt-0.5 bg-slate-500 transition-colors group-hover:bg-sky-400" />
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-10 pointer-events-none hidden group-hover:flex gap-2 bg-slate-900/95 border border-slate-600 rounded p-2 shadow-xl">
+                  <span className="mt-0.5 h-1 w-1 rounded-full bg-slate-500 transition-colors group-hover:bg-sky-400" />
+                  <div className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 hidden -translate-x-1/2 gap-2 rounded border border-slate-600 bg-slate-900/95 p-2 shadow-xl group-hover:flex">
                     {films.toReversed().map((film) => (
                       <div
                         key={film.letterboxdUrl}
-                        className="flex flex-col gap-1 w-24 flex-shrink-0"
+                        className="flex w-24 flex-shrink-0 flex-col gap-1"
                       >
                         {film.posterUrl ? (
                           // eslint-disable-next-line @next/next/no-img-element
@@ -102,16 +102,16 @@ function CalendarGrid({
                             alt={film.title}
                             width={96}
                             height={144}
-                            className="w-24 h-36 object-cover rounded"
+                            className="h-36 w-24 rounded object-cover"
                           />
                         ) : (
-                          <div className="w-24 h-36 bg-slate-700 rounded flex items-center justify-center">
-                            <span className="text-xs text-slate-400 text-center px-1 leading-tight">
+                          <div className="flex h-36 w-24 items-center justify-center rounded bg-slate-700">
+                            <span className="px-1 text-center text-xs leading-tight text-slate-400">
                               {film.title}
                             </span>
                           </div>
                         )}
-                        <span className="text-xs leading-tight line-clamp-2">
+                        <span className="line-clamp-2 text-xs leading-tight">
                           {film.title}
                         </span>
                       </div>
@@ -160,16 +160,16 @@ export function MonthSection({
 
   return (
     <section>
-      <h3 className="text-xl font-bold mb-3">
+      <h3 className="mb-3 text-xl font-bold">
         {month.replace('-', '/')} ({films.length})
       </h3>
-      <div className="flex gap-8 items-start">
-        <div className="flex flex-wrap gap-4 flex-1 min-w-0">
+      <div className="flex items-start gap-8">
+        <div className="flex min-w-0 flex-1 flex-wrap gap-4">
           {films.map((film) => (
             <FilmCard key={film.letterboxdUrl} film={film} />
           ))}
         </div>
-        <div className="hidden lg:block flex-shrink-0">
+        <div className="hidden flex-shrink-0 lg:block">
           <CalendarGrid month={month} filmsByDate={filmsByDate} />
         </div>
       </div>
