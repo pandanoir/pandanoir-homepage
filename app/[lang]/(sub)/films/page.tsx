@@ -26,9 +26,18 @@ export default async function FilmsPage({
     notFound();
   }
 
-  let films = await fetchLetterboxdFilms(lang);
+  let films: Film[] = [];
+  try {
+    films = await fetchLetterboxdFilms(lang);
+  } catch {
+    // fetchLetterboxdFilms が失敗した場合は空配列のままフォールバックへ
+  }
   if (films.length === 0 && lang === 'ja') {
-    films = await fetchLetterboxdFilms('en'); // tmdb APIの呼び出しがタイムアウトするパターンがあるのでフォールバックする
+    try {
+      films = await fetchLetterboxdFilms('en');
+    } catch {
+      // en も失敗した場合は空のまま表示
+    }
   }
 
   const filmsByMonth = new Map<string, Film[]>();

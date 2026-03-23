@@ -110,7 +110,11 @@ export async function fetchLetterboxdFilms(lang: 'ja' | 'en'): Promise<Film[]> {
     const tmdbIds = items
       .map((item) => item.match(/<tmdb:movieId>(\d+)<\/tmdb:movieId>/)?.[1])
       .filter((id): id is string => !!id);
-    jaTitleMap = await fetchJaTitleMap([...new Set(tmdbIds)]);
+    try {
+      jaTitleMap = await fetchJaTitleMap([...new Set(tmdbIds)]);
+    } catch {
+      // Redis/TMDB 障害時は英語タイトルにフォールバック
+    }
   }
 
   return items.map((itemXml) => {
