@@ -21,6 +21,9 @@ const nextConfig = {
   },
   env: {
     COMMIT_ID: execSync('git rev-parse --short HEAD').toString().trim(),
+    LETTERBOXD_USER: process.env.LETTERBOXD_USER,
+    TMDB_API_KEY: process.env.TMDB_API_KEY,
+    TMDB_API_READ_ACCESS_TOKEN: process.env.TMDB_API_READ_ACCESS_TOKEN,
   },
 };
 
