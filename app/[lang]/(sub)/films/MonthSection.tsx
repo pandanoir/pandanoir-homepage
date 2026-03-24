@@ -1,4 +1,3 @@
-'use client';
 import '../../../../lib/mapPolyfill';
 import { type Film } from '../../../_utils/fetchLetterboxdFilms';
 
