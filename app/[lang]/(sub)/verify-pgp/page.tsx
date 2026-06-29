@@ -8,7 +8,6 @@ import {
   pgpFingerprint,
   shortPgpFingerprint,
 } from '../../_constants/pgpFingerprint';
-import { promises as fs } from 'fs';
 
 const CodeBlock = (props: { children: string }) => (
   <div className="group relative w-min max-w-full rounded-sm bg-gray-300 px-4 py-2 text-gray-900">
@@ -34,7 +33,10 @@ export default async function VerifyPgpPage({
   const { lang } = ParamsSchema.parse(await params);
   const [dict, signedMessage] = await Promise.all([
     getDictionary(lang).then((mod) => mod.verifyPage),
-    fs.readFile(`${process.cwd()}/public/signed-message.txt`, 'utf8'),
+    fetch(
+      'https://raw.githubusercontent.com/pandanoir/pandanoir/main/signed-message.txt',
+      { next: { revalidate: 3600 } }
+    ).then((res) => res.text()),
   ]);
   return (
     <>
@@ -101,7 +103,7 @@ gpg --no-default-keyring \
 # ${dict['メッセージを検証する']}
 gpg --no-default-keyring \
     --keyring /tmp/verify-key/keyring.gpg \
-    --verify <(curl -s https://www.pandanoir.net/signed-message.txt)
+    --verify <(curl -sL https://www.pandanoir.net/signed-message.txt)
 
 # ${dict['一時鍵リングを削除']}
 rm -rf /tmp/verify-key

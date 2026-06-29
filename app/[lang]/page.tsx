@@ -21,7 +21,6 @@ import { ParamsSchema } from './parseLangParam';
 import { notFound } from 'next/navigation';
 import { locales } from './_dictionaries/locales';
 import { RichText } from './RichText';
-import { promises as fs } from 'fs';
 import { CopyButton } from '../_components/CopyButton';
 import {
   pgpFingerprint,
@@ -105,7 +104,10 @@ export default async function Home({
     .catch(() => []);
   const [dict, signedMessage] = await Promise.all([
     getDictionary(lang).then((mod) => mod.home),
-    fs.readFile(`${process.cwd()}/public/signed-message.txt`, 'utf8'),
+    fetch(
+      'https://raw.githubusercontent.com/pandanoir/pandanoir/main/signed-message.txt',
+      { next: { revalidate: 3600 } }
+    ).then((res) => res.text()),
   ]);
 
   return (
@@ -126,7 +128,7 @@ export default async function Home({
             <p className="[grid-area:description]">
               {
                 dict[
-                  'ウェブフロントエンドエンジニア。ReactとTypeScriptに造詣が深い。'
+                'ウェブフロントエンドエンジニア。ReactとTypeScriptに造詣が深い。'
                 ]
               }
             </p>
@@ -315,7 +317,7 @@ export default async function Home({
                 <span className="text-sm">
                   {
                     dict[
-                      'ファイルパスのリストをディレクトリツリーに変換するCLIツール'
+                    'ファイルパスのリストをディレクトリツリーに変換するCLIツール'
                     ]
                   }
                 </span>
