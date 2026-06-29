@@ -17,6 +17,13 @@ const nextConfig = {
         permanent: true,
         basePath: false,
       },
+      {
+        source: '/signed-message.txt',
+        destination:
+          'https://raw.githubusercontent.com/pandanoir/pandanoir/main/signed-message.txt',
+        permanent: true,
+        basePath: false,
+      },
     ];
   },
   env: {
